@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const product = () => {
+const Product = () => {
   const renderStyleClass = () => {
     const avaialeStyles = ["one", "two", "three"];
     if (avaialeStyles.includes(productStyle)) {
@@ -189,4 +189,4 @@ const product = () => {
   );
 };
 
-export default product;
+export default Product;
