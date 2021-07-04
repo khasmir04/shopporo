@@ -2,7 +2,7 @@ import { Row, Col, Empty, Pagination } from "antd";
 // import { useSelector } from "react-redux";
 // import classNames from "classnames";
 
-import Product from "../product/Product";
+// import Product from "../product/Product";
 // import {
 //   getProductsByFilter,
 //   getProductsBySearch,
@@ -2008,7 +2008,7 @@ function ShopContentProduct({
             className={classNames({ "five-col": fiveColumn })}
             {...productResponsive}
           >
-            <Product data={product} productStyle={productStyle} />
+            {/* <Product data={product} productStyle={productStyle} /> */}
           </Col>
         ))}
       </Row>
