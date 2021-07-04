@@ -1,0 +1,23 @@
+.zoom-image {
+  width: 100%;
+  background-repeat: no-repeat;
+  cursor: zoom-in;
+  &:hover {
+    img {
+      opacity: 0;
+    }
+  }
+  img {
+    @include imgCenter;
+    display: block;
+    pointer-events: none;
+  }
+  &.-disable-on-mobile {
+    @include mq(md) {
+      background: none !important;
+      img {
+        opacity: 1 !important;
+      }
+    }
+  }
+}

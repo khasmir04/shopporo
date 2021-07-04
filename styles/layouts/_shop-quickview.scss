@@ -1,0 +1,34 @@
+.shop-qv {
+  &__slide {
+    @include mq(md) {
+      margin-bottom: emCal(14, 35);
+    }
+    img {
+      @include imgCenter;
+    }
+    &-big {
+      .slider-item {
+        img {
+          @include imgCenter($height: emCal(16, 330));
+        }
+      }
+    }
+    &-small {
+      margin: 0 emCal(16, -5);
+      .slick-current {
+        .slider-item {
+          img {
+            border-color: setColor(red);
+          }
+        }
+      }
+      .slider-item {
+        padding: 0 emCal(16, 5);
+        img {
+          border: 1px solid transparent;
+          @include imgCenter($height: emCal(16, 80));
+        }
+      }
+    }
+  }
+}

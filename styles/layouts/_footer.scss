@@ -1,0 +1,113 @@
+.footer {
+  &-subcribe {
+    &__form {
+      margin-bottom: emCal(16, 30);
+      &.ant-form {
+        position: relative;
+        .ant-input {
+          border-width: 0 0 2px 0;
+          border-color: setShadeColor(dark);
+          border-right-width: 0 !important;
+          font-size: emCal(16, 15);
+          height: emCal(15, 45);
+          padding: 0;
+          &:focus {
+            border-color: setColor(red);
+          }
+        }
+        .ant-btn {
+          position: absolute;
+          top: 50%;
+          right: 0;
+          color: setShadeColor(dark);
+          font-weight: 700;
+          transform: translateY(-50%);
+          padding: 0;
+          &:hover {
+            color: setColor(red);
+          }
+        }
+      }
+    }
+  }
+  &-title {
+    @include typo($up: true, $fw: 700);
+  }
+  &-top {
+    padding: remCal(70) 0;
+    border: solid setShadeColor(border);
+    border-width: 1px 0 1px 0;
+    &-item {
+      @include mq(lg) {
+        margin-bottom: emCal(16, 50);
+      }
+      &.-col-one {
+        a {
+          display: inline-block;
+          margin-bottom: emCal(16, 40);
+          img {
+            @include imgCenter($width: 110px, $type: contain);
+          }
+        }
+        p {
+          @include typo($fsz: emCal(16, 15), $lh: emCal(15, 26));
+          max-width: 254px;
+          margin-bottom: emCal(15, 30);
+        }
+        ul {
+          list-style: none;
+          li {
+            @include typo($fsz: emCal(16, 15), $lh: emCal(15, 26));
+          }
+        }
+      }
+      &.-col-two {
+        .footer-title {
+          margin-bottom: emCal(16, 40);
+        }
+        ul {
+          list-style: none;
+          li {
+            a {
+              @include link($fsz: emCal(16, 15), $lh: emCal(15, 30));
+            }
+          }
+        }
+      }
+      &.-col-three {
+        margin-bottom: 0;
+        @include mq(lg) {
+          text-align: center;
+        }
+        @include mq(sm) {
+          text-align: left;
+        }
+        .footer-title {
+          margin-bottom: emCal(16, 15);
+        }
+        p {
+          @include typo(
+            $fsz: emCal(16, 15),
+            $lh: emCal(15, 26),
+            $color: setShadeColor(medium)
+          );
+          margin-bottom: emCal(16, 30);
+        }
+        img {
+          max-width: 100%;
+        }
+      }
+    }
+  }
+  &-bottom {
+    text-align: center;
+    padding: emCal(16, 17) 0;
+    p {
+      @include typo(
+        $fsz: emCal(16, 14),
+        $lh: emCal(15, 24),
+        $color: setShadeColor(medium)
+      );
+    }
+  }
+}

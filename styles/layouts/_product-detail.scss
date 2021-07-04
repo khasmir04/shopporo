@@ -1,0 +1,429 @@
+.product-detail {
+  &-guaranteed {
+    text-align: center;
+    .ant-divider {
+      margin-bottom: emCal(16, 25);
+      &-inner-text {
+        @include typo($fsz: emCal(16, 20), $fw: 700);
+      }
+    }
+    img {
+      max-width: 100%;
+    }
+  }
+  &-breadcrumb {
+    margin-bottom: emCal(16, 45);
+    span {
+      @include typo($fsz: emCal(16, 15), $fw: 600);
+      &:last-child {
+        span {
+          color: setShadeColor(light);
+        }
+      }
+    }
+  }
+  &-review-item {
+    display: flex;
+    align-items: center;
+    &__avatar {
+      padding-right: emCal(16, 25);
+
+      text-align: center;
+      img {
+        @include imgCenter($height: emCal(16, 70), $width: emCal(16, 70));
+        border-radius: 999px;
+        margin: 0 auto;
+        margin-bottom: emCal(16, 15);
+      }
+    }
+    &__content {
+      padding-left: emCal(16, 25);
+      border-left: 1px solid setShadeColor(border);
+      h5 {
+        @include typo($fsz: emCal(16, 13), $color: setColor(red));
+        margin-bottom: emCal(13, 10);
+      }
+      h3 {
+        @include typo($fsz: emCal(16, 20), $fw: 600);
+        margin-bottom: emCal(20, 20);
+      }
+      p {
+        @include typo($fsz: emCal(16, 15), $lh: emCal(15, 26));
+      }
+    }
+  }
+  &-one {
+    overflow: hidden;
+    &-top {
+      padding: emCal(16, 30) 0 emCal(16, 80);
+      margin-bottom: remCal(70);
+      background-color: setColor(light);
+    }
+    .product-detail-image-one {
+      @include mq(md) {
+        margin-bottom: emCal(14, 50);
+      }
+    }
+  }
+  &-two {
+    padding: emCal(16, 30) 0 emCal(16, 80);
+    overflow: hidden;
+    .product-detail-image-two {
+      @include mq(md) {
+        margin-bottom: emCal(14, 50);
+      }
+    }
+    .product-detail-content-one {
+      margin-bottom: emCal(16, 50);
+    }
+  }
+  &-three {
+    padding: emCal(16, 30) 0 emCal(16, 70);
+    overflow: hidden;
+    .product-detail-image-three {
+      margin-bottom: emCal(16, 50);
+    }
+    .product-detail-content-one {
+      text-align: center;
+      margin-bottom: remCal(70);
+      &-price {
+        justify-content: center;
+      }
+      &-variation {
+        justify-content: center;
+      }
+      &-actions {
+        justify-content: center;
+      }
+    }
+  }
+  &-image-one {
+    img {
+      @include imgCenter();
+    }
+    &-small {
+      @include mq(md) {
+        max-height: emCal(16, 500);
+      }
+      overflow: hidden;
+      img {
+        border: 1px solid transparent;
+      }
+      .slick-current {
+        img {
+          border-color: setColor(red);
+        }
+      }
+    }
+    &-big {
+      img {
+        @include imgCenter($height: emCal(16, 500));
+      }
+    }
+  }
+  &-image-two {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: emCal(16, 30);
+    img {
+      // @include imgCenter;
+      width: 100%;
+    }
+  }
+  &-image-three {
+    margin: 0 emCal(16, -30);
+
+    .slider-item {
+      padding: 0 emCal(16, 30);
+      cursor: grab;
+      img {
+        @include imgCenter($height: emCal(16, 550));
+        @include mq(sm) {
+          @include imgCenter($height: emCal(16, 300));
+        }
+      }
+    }
+    @include mq(md) {
+      margin: 0 emCal(14, -5);
+      .slider-item {
+        padding: 0 emCal(14, 5);
+      }
+    }
+  }
+  &-content-one {
+    h3 {
+      @include typo($fsz: emCal(16, 24), $lh: emCal(24, 32), $cpt: true);
+      margin-bottom: emCal(24, 15);
+    }
+    &-price {
+      display: flex;
+      align-items: center;
+      margin-bottom: emCal(16, 30);
+      h5 {
+        @include typo($fsz: emCal(16, 30), $fw: 700);
+        margin-right: emCal(30, 15);
+      }
+      span {
+        @include typo($fsz: emCal(16, 20), $color: setShadeColor(medium));
+        text-decoration: line-through;
+      }
+    }
+    &-rate {
+      margin-bottom: emCal(16, 25);
+      .ant-rate {
+        margin-right: emCal(16, 5);
+        &-star {
+          margin-right: emCal(16, 1);
+        }
+      }
+      .shop-qv-review-count {
+        @include typo($fsz: emCal(16, 15));
+      }
+    }
+    &-description {
+      @include typo($fsz: emCal(16, 15), $lh: emCal(15, 27));
+      margin-bottom: emCal(15, 40);
+    }
+    &-countdown {
+      text-align: center;
+      max-width: 80%;
+      margin: 0 auto;
+      margin-bottom: emCal(16, 40);
+      h3 {
+        @include typo($fsz: emCal(16, 20), $fw: 600);
+        margin-bottom: emCal(20, 15);
+      }
+      &__items {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: emCal(16, 30);
+      }
+      &__item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        margin: 0 emCal(16, 10);
+
+        @include spaceTrim;
+        div {
+          @include typo($fsz: emCal(16, 30), $fw: 600);
+          background-color: setColor(light);
+          height: emCal(30, 60);
+          width: emCal(30, 60);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        span {
+          display: block;
+        }
+      }
+      &__sold {
+        .sold-data {
+          display: flex;
+          justify-content: space-between;
+          h5 {
+            @include typo($fsz: emCal(16, 15), $fw: 600);
+            span {
+              color: setColor(red);
+            }
+          }
+        }
+      }
+    }
+    &-variation {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: emCal(16, 40);
+
+      .variation-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: emCal(16, 10);
+        p {
+          @include typo($fsz: emCal(16, 15), $fw: 600);
+          margin-right: emCal(15, 12);
+        }
+        .ant-radio-group {
+          .ant-radio-button-wrapper {
+            margin-right: emCal(16, 10);
+          }
+        }
+        &.-size {
+          .ant-radio-group {
+            .ant-radio-button-wrapper {
+              background-color: transparent;
+              span {
+                font-size: emCal(16, 12);
+                font-weight: 700;
+              }
+              &-checked {
+                background-color: #000;
+                color: #fff;
+                border-color: transparent;
+                &::before {
+                  display: none;
+                }
+              }
+            }
+          }
+        }
+        &.-color {
+          margin-left: emCal(16, 40);
+          .ant-radio-group {
+            .ant-radio-button-wrapper {
+              border-radius: 999px;
+              padding: 0;
+              height: emCal(16, 30);
+              width: emCal(16, 30);
+              border: emCal(16, 4) solid #fff;
+              box-shadow: 0px 0px 0px 1px setShadeColor(medium);
+              &:hover {
+                box-shadow: 0px 0px 0px 1px setColor(red);
+              }
+              &-checked {
+                box-shadow: 0px 0px 0px 1px setColor(red);
+              }
+              &::before {
+                display: none;
+              }
+            }
+          }
+        }
+      }
+      @include mq(sm) {
+        justify-content: flex-start;
+        .variation-item.-color {
+          margin-left: 0;
+        }
+      }
+    }
+    &-actions {
+      display: flex;
+      align-items: center;
+      margin-bottom: emCal(16, 50);
+      .quantity-selector {
+        margin-right: emCal(16, 20);
+      }
+      .product-detail-content-one-atc {
+        &.ant-btn {
+          font-size: emCal(16, 13);
+          color: setShadeColor(dark);
+          text-transform: uppercase;
+          letter-spacing: emCal(13, 2.6);
+          font-weight: 700;
+          position: relative;
+          padding: 0 0 emCal(13, 10);
+          overflow: hidden;
+          &[disabled] {
+            color: setShadeColor(light);
+            &::after {
+              background-color: setShadeColor(light);
+              left: 10px;
+              right: 10px;
+            }
+          }
+          &:hover {
+            &::after {
+              left: 10px;
+              right: 10px;
+              color: setColor(red);
+            }
+          }
+          &::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: emCal(13, 2);
+            background-color: setShadeColor(dark);
+            transition: $transition;
+          }
+        }
+      }
+    }
+  }
+  &-tab {
+    &-item {
+      &.-description {
+        .tab-des--bold {
+          @include typo($fsz: emCal(16, 18), $lh: emCal(18, 28), $fw: 600);
+          margin-bottom: emCal(18, 40);
+        }
+        .tab-title {
+          @include typo($fsz: emCal(16, 20), $fw: 600);
+          margin-bottom: emCal(20, 15);
+        }
+        .tab-des {
+          @include typo(
+            $fsz: emCal(16, 15),
+            $lh: emCal(15, 36),
+            $color: setShadeColor(medium)
+          );
+          margin-bottom: emCal(15, 30);
+        }
+      }
+      &.-review {
+        .product-detail-review-item {
+          margin-bottom: emCal(16, 30);
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
+      &.-info {
+        text-align: center;
+        table {
+          border: 1px solid setShadeColor(border);
+          tr {
+            td {
+              border: 1px solid setShadeColor(border);
+              padding: emCal(16, 20) emCal(16, 30);
+              &:nth-child(2) {
+                padding: emCal(16, 20) emCal(16, 50);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  &-tab-one {
+    margin-bottom: remCal(70);
+    .ant-tabs {
+      &-nav {
+        margin-bottom: emCal(16, 40);
+      }
+    }
+  }
+  &-tab-two {
+    .ant-collapse {
+      background-color: transparent;
+      border: 0;
+      & > .ant-collapse-item {
+        &:first-child {
+          .ant-collapse-header {
+            border-top: 1px solid #d9d9d9;
+          }
+        }
+        .ant-collapse-header {
+          padding: emCal(16, 20) 0;
+          padding-left: 0;
+          @include typo($fsz: emCal(20, 24), $fw: 700);
+        }
+        .ant-collapse-content {
+          border-top: 0;
+          padding-bottom: emCal(16, 25);
+          &-box {
+            padding: 0;
+          }
+        }
+      }
+    }
+  }
+}

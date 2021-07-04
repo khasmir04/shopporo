@@ -1,0 +1,65 @@
+.cart-sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  &-item {
+    display: flex;
+    align-items: center;
+    padding-bottom: emCal(16, 30);
+    margin-bottom: emCal(16, 30);
+    border-bottom: 1px solid setShadeColor(border);
+    &:last-child {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+    &__image {
+      margin-right: emCal(16, 25);
+      img {
+        @include imgCenter($height: emCal(16, 90), $width: emCal(16, 90));
+      }
+    }
+    &__content {
+      margin-right: emCal(16, 25);
+      a {
+        @include link($fsz: emCal(16, 15), $lh: emCal(15, 25));
+        @include overflowText(1);
+        margin-bottom: 1em;
+      }
+      h5 {
+        @include typo($fsz: emCal(16, 17), $fw: 600);
+        margin-bottom: emCal(17, 20);
+      }
+    }
+    &__close {
+      margin-left: auto;
+      align-self: center;
+      a {
+        @include link($fsz: emCal(16, 24));
+      }
+    }
+  }
+  &-total {
+    margin-top: auto;
+    padding-top: emCal(16, 25);
+    border-top: 1px solid setShadeColor(border);
+    h5 {
+      margin-bottom: emCal(15, 25);
+      @include typo($fsz: emCal(16, 15), $fw: 700, $up: true);
+      span {
+        float: right;
+        font-size: emCal(16, 20);
+      }
+    }
+    &__buttons {
+      display: flex;
+      .ant-btn {
+        font-size: emCal(16, 13);
+        letter-spacing: emCal(13, 2.6);
+        text-transform: uppercase;
+        height: emCal(13, 40);
+        flex-grow: 1;
+        border: 0;
+      }
+    }
+  }
+}

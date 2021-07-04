@@ -1,0 +1,22 @@
+.menu-side {
+  .ant-drawer-header {
+    padding: emCal(16, 25) emCal(16, 40);
+    display: flex;
+    .ant-drawer-title {
+      @include typo($fsz: emCal(16, 20), $fw: 700);
+    }
+    .ant-drawer-close {
+      position: unset;
+      margin-left: auto;
+      padding: 0;
+      p {
+        @include typo($fsz: emCal(16, 15));
+        margin-right: emCal(15, 5);
+        display: inline-block;
+      }
+    }
+  }
+  .ant-drawer-body {
+    padding: emCal(16, 25) emCal(16, 40);
+  }
+}

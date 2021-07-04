@@ -1,0 +1,28 @@
+$colors: (
+  red: #fb5231,
+  blue: #1a173c,
+  light: #f2f4f5,
+);
+
+$shades: (
+  dark: #0d0d0d,
+  medium: #888,
+  light: #b7b7b7,
+  border: #eff1f2,
+);
+
+$container: 1470px;
+$container-fluid: 1920px;
+
+$breakpoint: (
+  sm: "576px",
+  md: "768px",
+  lg: "992px",
+  xl: "1200",
+  xxl: "1400px",
+  xxxl: "1600px",
+);
+
+$rem-baseline: 16;
+$transition: 0.2s ease-in-out;
+$prefixes: (webkit, moz, ms, o);

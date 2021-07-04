@@ -1,0 +1,51 @@
+.top-nav {
+  background-color: setColor(red);
+  border-bottom: 1px solid rgba(#fff, 20%);
+  padding: emCal(16, 6) 0;
+  @include mq(md) {
+    display: none;
+  }
+  &-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &-selects {
+    .ant-select {
+      &:first-child {
+        margin-right: emCal(15, 20);
+      }
+      &-selector {
+        padding: 0 !important;
+        .ant-select-selection-item {
+          color: #fff;
+          font-size: emCal(16, 15);
+        }
+      }
+      &-arrow {
+        path {
+          fill: #fff;
+        }
+      }
+    }
+  }
+  &-links {
+    display: flex;
+    &__item {
+      &:first-child {
+        margin-right: emCal(16, 30);
+      }
+      a {
+        @include link(
+          $fsz: emCal(16, 15),
+          $color: #fff,
+          $hvr-color: darken(#fff, 10%)
+        );
+        display: inline-block;
+        i {
+          margin-right: emCal(16, 10);
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,79 @@
+.wishlist-sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  &-item {
+    display: flex;
+    align-items: center;
+    padding-bottom: emCal(16, 30);
+    margin-bottom: emCal(16, 30);
+    border-bottom: 1px solid setShadeColor(border);
+    &:last-child {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+    &__image {
+      margin-right: emCal(16, 25);
+      img {
+        @include imgCenter($height: emCal(16, 90), $width: emCal(16, 90));
+      }
+    }
+    &__content {
+      margin-right: emCal(16, 25);
+      a {
+        @include link($fsz: emCal(16, 15), $lh: emCal(15, 25));
+        @include overflowText(1);
+        margin-bottom: 1em;
+      }
+      h5 {
+        @include typo($fsz: emCal(16, 17), $fw: 600);
+        margin-bottom: emCal(17, 20);
+      }
+    }
+    &__close {
+      margin-left: auto;
+      align-self: center;
+      a {
+        @include link($fsz: emCal(16, 24));
+      }
+    }
+    .ant-btn {
+      height: emCal(13, 30);
+      letter-spacing: emCal(13, 2.3);
+      font-size: emCal(16, 13);
+      background-color: setColor(red);
+      color: #fff;
+      border: 0;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .btn-atc {
+      @include mq(sm) {
+        display: none;
+      }
+      &-mobile {
+        display: none;
+        @include mq(sm) {
+          display: block;
+        }
+      }
+    }
+    .btn-sold {
+      @include mq(sm) {
+        display: none;
+      }
+      &-mobile {
+        background-color: setColor(light);
+        color: setShadeColor(dark);
+        display: none;
+        @include mq(sm) {
+          display: block;
+        }
+      }
+    }
+    .ant-btn[disabled] {
+      background-color: setColor(light);
+      color: setShadeColor(dark);
+    }
+  }
+}

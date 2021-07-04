@@ -1,0 +1,250 @@
+.checkout {
+  overflow: hidden;
+  &-title {
+    @include typo($fsz: emCal(16, 24), $fw: 700);
+    margin-bottom: emCal(24, 30);
+  }
+  &-top {
+    border-bottom: 1px solid setShadeColor(border);
+    padding-bottom: emCal(16, 70);
+  }
+  &-bottom {
+    padding: emCal(16, 50) 0;
+  }
+  &-functions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: emCal(16, 50);
+    @include mq(md) {
+      justify-content: flex-end;
+    }
+    .checkout-price-finally {
+      @include mq(md) {
+        margin-bottom: emCal(14, 30);
+        width: 100%;
+      }
+      table {
+        tbody {
+          tr {
+            td {
+              padding: 5px 10px;
+              &:last-child {
+                text-align: right;
+              }
+            }
+            &:first-child {
+              td {
+                @include typo($fsz: emCal(16, 15), $fw: 700);
+              }
+            }
+            &:last-child {
+              td {
+                @include typo($fsz: emCal(16, 24), $fw: 700);
+                &:last-child {
+                  color: setColor(red);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    &--shopping {
+      color: setShadeColor(dark);
+      border: 1px solid setShadeColor(dark);
+      &:hover {
+        background: setShadeColor(dark);
+        color: #fff;
+        border-color: transparent;
+      }
+    }
+    &--next {
+      background: setShadeColor(dark);
+      color: #fff;
+      border: 0;
+      &:hover {
+        background: lighten(setShadeColor(dark), 10%);
+        color: #fff;
+      }
+    }
+    .ant-btn {
+      font-size: emCal(16, 15);
+      height: emCal(15, 50);
+      padding: 0 emCal(15, 30);
+      font-weight: 700;
+      text-transform: uppercase;
+      transition: $transition;
+      @include mq(md) {
+        margin-bottom: emCal(14, 30);
+      }
+      a {
+        transition: none;
+      }
+    }
+  }
+  &-related-products {
+    margin: 0 emCal(16, -15);
+    .slider-item {
+      padding: 0 emCal(16, 15);
+    }
+  }
+  &-form {
+    .ant-form {
+      &-item {
+        &-label {
+          label {
+            @include typo($fsz: emCal(16, 15));
+            &.ant-form-item-required {
+              &:before {
+                display: none;
+              }
+              &:after {
+                content: "*";
+                display: inline-block;
+              }
+            }
+          }
+        }
+        &-control {
+          .ant-select {
+            &-selector {
+              height: emCal(16, 45);
+              border-width: 0 0 1px 0;
+              border-right: 0;
+              border-radius: 0;
+              .ant-select-selection-search-input {
+                height: emCal(18, 45);
+              }
+              .ant-select-selection-item {
+                font-size: emCal(16, 18);
+                font-weight: 700;
+                line-height: emCal(18, 45);
+                color: setShadeColor(dark);
+                border-width: 0 0 1px 0;
+                border-right: 0;
+                border-radius: 0;
+              }
+            }
+          }
+          .ant-form-item-control-input {
+            &-content {
+              input {
+                font-size: emCal(16, 18);
+                font-weight: 700;
+                color: setShadeColor(dark);
+                height: emCal(18, 45);
+                border-width: 0 0 1px 0;
+                border-right: 0;
+                border-radius: 0;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  &-total {
+    background-color: setColor(light);
+    padding: emCal(16, 40);
+    &__table {
+      margin-bottom: emCal(16, 50);
+      table {
+        width: 100%;
+        th,
+        td {
+          &:first-child {
+            width: 65%;
+          }
+          &:last-child {
+            width: 35%;
+            text-align: right;
+          }
+        }
+      }
+      .divider {
+        width: 100%;
+        height: 1px;
+        background-color: #ddd;
+      }
+      &-calculate {
+        th {
+          @include typo($fsz: emCal(16, 15), $fw: 700);
+          padding: emCal(15, 25) 0;
+          &:last-child {
+            text-transform: uppercase;
+          }
+        }
+        td {
+          @include typo($fsz: emCal(16, 15), $lh: emCal(15, 20));
+          padding: emCal(15, 10) 0;
+          &:first-child {
+            span {
+              font-weight: 700;
+            }
+          }
+          &:last-child {
+            text-align: right;
+            font-weight: 700;
+          }
+        }
+      }
+      &-subtotal {
+        td {
+          @include typo($fsz: emCal(16, 20), $fw: 700);
+          padding: 1em 0;
+        }
+      }
+      &-shiping {
+        td {
+          &:first-child {
+            padding: emCal(15, 20) 0;
+            h5 {
+              @include typo($fsz: emCal(16, 15), $fw: 700);
+              margin-bottom: 1em;
+            }
+            p {
+              @include typo($fsz: emCal(16, 15), $color: setShadeColor(medium));
+            }
+          }
+          &:last-child {
+            @include typo($fsz: emCal(16, 16), $fw: 700);
+            padding: emCal(16, 20) 0;
+          }
+        }
+      }
+      &-total {
+        td {
+          @include typo($fsz: emCal(16, 24), $fw: 700);
+          &:last-child {
+            color: setColor(red);
+          }
+        }
+      }
+    }
+    &__payment {
+      &-item {
+        margin-bottom: emCal(16, 20);
+        .ant-checkbox-wrapper {
+          span {
+            &:nth-child(2) {
+              @include typo($fsz: emCal(16, 15), $fw: 600);
+            }
+          }
+        }
+        &__content {
+          padding-top: emCal(16, 20);
+          overflow: hidden;
+          display: none;
+          height: 0;
+          transition: $transition;
+          &.active {
+            height: 100%;
+            display: block;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+.content {
+  padding-top: remCal(190);
+  @include mq(md) {
+    padding-top: remCal(150);
+  }
+  &.clear-top {
+    padding-top: remCal(120);
+    @include mq(md) {
+      padding-top: remCal(50);
+    }
+  }
+}

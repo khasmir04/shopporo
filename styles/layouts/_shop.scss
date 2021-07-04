@@ -1,0 +1,162 @@
+.shop-layout {
+  margin-bottom: remCal(70);
+  .shop {
+    &-sidebar {
+      @include mq(lg) {
+        margin-bottom: emCal(14, 50);
+      }
+      h5 {
+        @include typo($fsz: emCal(16, 30), $fw: 800, $cpt: true);
+        margin-bottom: emCal(30, 45);
+      }
+      &__subcategory {
+        ul {
+          list-style: none;
+          li {
+            margin-bottom: emCal(16, 18);
+            &:last-child {
+              margin-bottom: 0;
+            }
+            &.active {
+              a {
+                color: setShadeColor(dark);
+              }
+            }
+            a {
+              i {
+                margin-right: emCal(16, 15);
+              }
+              @include link(
+                $hvr-color: setShadeColor(dark),
+                $cpt: true,
+                $fw: 500,
+                $color: setShadeColor(light)
+              );
+            }
+          }
+        }
+        @include mq(md) {
+          display: none;
+        }
+        &-mobile {
+          display: none;
+          @include mq(md) {
+            display: block;
+          }
+          .ant-select {
+            .ant-select-selector {
+              background-color: setColor(light);
+              border: 0;
+              border-radius: 0;
+              height: emCal(16, 45);
+              .ant-select-selection-item {
+                font-weight: 700;
+                line-height: emCal(16, 45);
+                i {
+                  margin-right: emCal(16, 15);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    &-content {
+      &__header {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-bottom: emCal(16, 30);
+        @include mq(sm) {
+          justify-content: center;
+        }
+        &-showing {
+          @include mq(sm) {
+            margin-bottom: emCal(14, 20);
+          }
+          h5 {
+            @include typo($fsz: emCal(16, 18), $fw: 500);
+          }
+        }
+        &-filter {
+          p {
+            @include typo($fsz: emCal(16, 15), $fw: 500);
+            margin-right: emCal(15, 20);
+            display: inline-block;
+            margin-right: emCal(15, 20);
+          }
+          &__select {
+            &.ant-select {
+              .ant-select-selector {
+                border: 0;
+                background-color: setColor(light);
+                height: emCal(16, 40);
+              }
+              .ant-select-selection-item {
+                font-size: emCal(16, 15);
+                color: setShadeColor(dark);
+                font-weight: 500;
+                line-height: emCal(16, 40);
+              }
+            }
+          }
+        }
+      }
+      &__product {
+        .five-col {
+          @media (min-width: 1200px) {
+            flex: 1 1 20%;
+            max-width: 20%;
+          }
+        }
+        .ant-pagination-prev,
+        .ant-pagination-next {
+          background-color: setColor(light);
+          border: 0;
+          border-radius: 0;
+          height: emCal(16, 40);
+          width: emCal(16, 40);
+          &:hover:not(.ant-pagination-disabled) {
+            background-color: darken(setColor(light), 10%);
+          }
+          a {
+            color: setShadeColor(dark);
+            font-size: emCal(16, 15);
+            line-height: emCal(15, 40);
+          }
+        }
+        .ant-pagination {
+          @include mq(lg) {
+            text-align: center;
+          }
+          &-item {
+            background-color: setColor(light);
+            border: 0;
+            border-radius: 0;
+            height: emCal(16, 40);
+            width: emCal(16, 40);
+            &:hover {
+              background-color: darken(setColor(light), 10%);
+            }
+            a {
+              color: setShadeColor(dark);
+              font-size: emCal(16, 15);
+              line-height: emCal(15, 40);
+            }
+            &-active {
+              background-color: setShadeColor(dark);
+              &:hover {
+                background-color: setShadeColor(dark);
+              }
+              a,
+              button {
+                color: #fff;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,268 @@
+.product {
+  &-image {
+    margin-bottom: emCal(16, 20);
+    overflow: hidden;
+    position: relative;
+    background-color: #ebebeb;
+    &:hover {
+      a {
+        img {
+          transform: scale(1);
+          &:last-child {
+            opacity: 1;
+          }
+        }
+      }
+    }
+    a {
+      display: block;
+      &.loading {
+        display: none;
+      }
+      img {
+        @include imgCenter();
+        transition: $transition;
+        transform: scale(1.05);
+        &:last-child {
+          position: absolute;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          right: 0;
+          opacity: 0;
+        }
+      }
+    }
+    &-loading {
+      width: 100%;
+      height: emCal(16, 215);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .product-type {
+      position: absolute;
+      @include typo($fsz: emCal(16, 12), $color: #fff, $up: true);
+      top: emCal(14, 10);
+      left: 0;
+      background-color: #000;
+      padding: emCal(12, 5) emCal(12, 10);
+      &.-sale {
+        background-color: setColor(red);
+      }
+    }
+  }
+  &-content {
+    .product-name {
+      @include link($fsz: emCal(16, 15), $fw: 500, $cpt: true);
+      @include overflowText(1);
+      margin-bottom: emCal(16, 10);
+    }
+    .product-rate {
+      margin-bottom: emCal(16, 8);
+      .ant-rate {
+        margin-right: emCal(16, 10);
+        .ant-rate-star {
+          margin-right: 1px;
+        }
+      }
+      &-quantity {
+        @include typo($fsz: emCal(16, 13), $color: setShadeColor(medium));
+      }
+    }
+    &__footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      &-price {
+        display: flex;
+        align-items: center;
+        .product-price {
+          @include typo($fsz: emCal(16, 17), $fw: 500);
+          margin-right: emCal(17, 10);
+        }
+        span {
+          @include typo($fsz: emCal(16, 13), $color: setShadeColor(medium));
+          text-decoration: line-through;
+        }
+      }
+      .product-atc {
+        background-color: setColor(light);
+        height: emCal(16, 40);
+        width: emCal(16, 40);
+
+        &.ant-tooltip-disabled-compatible-wrapper {
+          border-radius: 999px;
+          overflow: hidden;
+          &:hover {
+            background-color: setColor(light);
+          }
+          .ant-btn {
+            height: emCal(16, 40);
+            width: emCal(16, 40);
+          }
+        }
+        &:hover {
+          background-color: setColor(red);
+          color: #fff;
+        }
+      }
+    }
+  }
+  &.-style-one {
+    .product-image {
+      &:hover {
+        .product-atw {
+          right: emCal(14, 10);
+        }
+        .product-qv {
+          opacity: 1;
+          visibility: visible;
+        }
+      }
+      .product-atw {
+        position: absolute;
+        top: emCal(14, 10);
+        right: -100px;
+        background-color: #fff;
+        font-size: emCal(16, 14);
+        height: emCal(14, 30);
+        width: emCal(14, 30);
+        &:hover {
+          background-color: setColor(red);
+          color: #fff;
+        }
+        &.active {
+          background-color: setColor(red);
+          color: #fff;
+        }
+      }
+      .product-qv {
+        position: absolute;
+        opacity: 0;
+        visibility: hidden;
+        bottom: emCal(14, 10);
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: emCal(16, 12);
+        border: 0;
+        text-transform: uppercase;
+        font-weight: 700;
+        letter-spacing: emCal(12, 1.2);
+        &:hover {
+          background-color: setColor(red);
+          color: #fff;
+        }
+      }
+      @include mq(lg) {
+        .product-atw {
+          right: emCal(14, 10);
+        }
+        .product-qv {
+          opacity: 1;
+          visibility: visible;
+        }
+      }
+    }
+  }
+  &.-style-two {
+    &:hover {
+      .product-button-group {
+        transform: translateX(-50%) scale(1);
+      }
+    }
+    .product-button-group {
+      position: absolute;
+      bottom: emCal(16, 20);
+      left: 50%;
+      transform: translateX(-50%) scale(0);
+      z-index: 2;
+      background-color: #fff;
+      display: flex;
+      transition: $transition;
+      .ant-btn {
+        padding: 0;
+        height: emCal(16, 40);
+        width: emCal(16, 40);
+        font-size: 1em;
+        border: 0;
+        &.active {
+          background-color: setColor(red);
+          color: #fff;
+          &:nth-child(2) {
+            &::after {
+              display: none;
+            }
+          }
+        }
+        &:nth-child(2) {
+          position: relative;
+
+          &::after {
+            content: "";
+            position: absolute;
+            top: 5px;
+            width: 100%;
+            bottom: 5px;
+            border: solid setShadeColor(border);
+            border-width: 0 1px 0 1px;
+          }
+          &::after {
+            left: 0;
+          }
+        }
+      }
+    }
+  }
+  &.-style-three {
+    position: relative;
+    .product-price {
+      font-size: emCal(16, 15);
+    }
+    .product-content {
+      .product-button-group {
+        display: flex;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        z-index: 10;
+        @include mq(lg) {
+          display: none;
+        }
+        &:hover {
+          .product-button-group__wrapper {
+            .ant-btn {
+              &:first-child {
+                transform: translateX(0);
+              }
+              &:nth-child(2) {
+                transform: translateX(0);
+              }
+            }
+          }
+        }
+        &__wrapper {
+          position: relative;
+          .ant-btn {
+            height: emCal(16, 40);
+            width: emCal(16, 40);
+            transition: $transition;
+            &:not(last-child) {
+              margin-right: 5px;
+            }
+            &:first-child {
+              transform: translateX(calc(200% + 10px));
+            }
+            &:nth-child(2) {
+              transform: translateX(calc(100% + 5px));
+            }
+            &.active {
+              background-color: setColor(red);
+              color: #fff;
+            }
+          }
+        }
+      }
+    }
+  }
+}

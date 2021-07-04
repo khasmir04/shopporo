@@ -1,0 +1,16 @@
+{
+  "information": [
+    { "name": "About Us", "src": "/about" },
+    { "name": "Contact Us", "src": "/contact" },
+    { "name": "Testmonials", "src": "/contact" },
+    { "name": "Terms & Conditions", "src": "/contact" },
+    { "name": "Affiliate Program", "src": "/contact" }
+  ],
+  "account": [
+    { "name": "Orders", "src": "/contact" },
+    { "name": "Downloads", "src": "/contact" },
+    { "name": "Addresses", "src": "/contact" },
+    { "name": "Account details", "src": "/contact" },
+    { "name": "Logout", "src": "/contact" }
+  ]
+}

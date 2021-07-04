@@ -1,0 +1,94 @@
+.subpages-sidebar-main {
+  .ant-drawer-content-wrapper {
+    .ant-drawer-content {
+      overflow: visible;
+      .ant-drawer-body {
+        padding: emCal(16, 60) emCal(16, 40);
+        text-align: center;
+        .subpages-sidebar-opener {
+          border: 0;
+          color: #fff;
+          display: block;
+          position: absolute;
+          top: 50%;
+          right: 100%;
+          height: emCal(16, 50);
+          width: emCal(16, 50);
+          background-color: red;
+          transform: translateY(-50%);
+        }
+        h2 {
+          @include typo($fsz: emCal(16, 24), $fw: 800);
+          margin-bottom: emCal(24, 25);
+          span {
+            @include typo($fsz: emCal(16, 72), $color: setColor(red), $fw: 500);
+            position: relative;
+            &::after {
+              content: "+";
+              font-size: emCal(72, 50);
+              display: inline-block;
+              transform: translateY(emCal(50, -30));
+            }
+          }
+        }
+        p {
+          @include typo($fsz: emCal(16, 15), $lh: emCal(15, 25), $fw: 600);
+          margin-bottom: emCal(15, 50);
+        }
+        .subpages-homepages-group {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: emCal(16, 25);
+          a {
+            display: block;
+            text-align: center;
+            &:hover {
+              img {
+                filter: brightness(0.5);
+              }
+            }
+            @include link($fsz: emCal(16, 15), $fw: 700);
+            img {
+              @include imgCenter($height: auto);
+              margin-bottom: emCal(15, 15);
+              transition: $transition;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+#subpages-sidebar {
+  .subpages-sidebar {
+    position: fixed;
+    top: 0;
+    left: 100%;
+    bottom: 0;
+    background-color: #fff;
+    max-width: 85vw;
+    width: remCal(445);
+    transition: $transition;
+    &.show {
+      left: auto;
+      right: 0;
+    }
+    .subpages-sidebar__wrapper {
+      height: 100%;
+      width: 100%;
+      position: relative;
+      padding: emCal(16, 60) emCal(16, 40);
+      .subpages-sidebar-opener {
+        display: block;
+        position: absolute;
+        top: 50%;
+        right: 100%;
+        height: emCal(16, 50);
+        width: emCal(16, 50);
+        background-color: red;
+        transform: translateY(-50%);
+      }
+    }
+  }
+}
