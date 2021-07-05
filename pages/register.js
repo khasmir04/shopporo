@@ -26,6 +26,9 @@ const register = ({ user }) => {
           }),
           headers: {
             "Content-Type": "application/json",
+            "Access-Control-Allow-Credentials": "true",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE, PATCH",
           },
         }
       );
