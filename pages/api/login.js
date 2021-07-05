@@ -27,7 +27,7 @@ export default nc()
 
       const user = await result.json();
 
-      if (!user.token) {
+      if (!user.data.jwt) {
         // return res.status(401).json({
         //   statusCode: 401,
         //   message: "Token not confirmed",
