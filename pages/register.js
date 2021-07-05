@@ -17,7 +17,7 @@ const register = ({ user }) => {
     try {
       const result = await fetch(
         // `${process.env.BACKEND_URL}/wp-json/wp/v2/users/register`,
-        `${process.env.BACKEND_URL}/?rest_route=/simple-jwt-login/v1/users`,
+        `${process.env.BACKEND_URL}/?rest_route=/simple-jwt-login/v1/users&AUTH_KEY=testing`,
         {
           method: "POST",
           body: JSON.stringify({
@@ -29,7 +29,6 @@ const register = ({ user }) => {
           }),
           headers: {
             "Content-Type": "application/json",
-            "AUTH_KEY": "testing",
           },
         }
       );
