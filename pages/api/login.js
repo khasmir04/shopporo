@@ -15,7 +15,7 @@ export default nc()
           body: JSON.stringify({
             // Username of a user on the WordPress website in which the REST API request
             // is being made to.
-            email: username,
+            username: username,
             // And the above user's password.
             password: password,
           }),
@@ -24,7 +24,6 @@ export default nc()
           },
         }
       );
-
       const user = await result.json();
 
       if (!user.data.jwt) {
@@ -34,9 +33,9 @@ export default nc()
         // });
         return "User not found.";
       }
-
       req.session.set("user", user);
       await req.session.save();
+
       res.json(user);
     } catch (error) {
       const { response: fetchResponse } = error;

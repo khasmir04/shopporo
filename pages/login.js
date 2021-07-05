@@ -6,7 +6,6 @@ import Link from "next/link";
 
 const login = ({ user }) => {
   const router = useRouter();
-
   const {
     register,
     handleSubmit,
@@ -18,7 +17,7 @@ const login = ({ user }) => {
       const result = await fetch(`/api/login`, {
         method: "POST",
         body: JSON.stringify({
-          email: data.email,
+          username: data.username,
           password: data.password,
         }),
         headers: {
@@ -45,19 +44,19 @@ const login = ({ user }) => {
             <div className="mb-4">
               <label
                 className="block text-gray-700 text-sm font-normal mb-2"
-                htmlFor="email"
+                htmlFor="username"
               >
-                Email
+                Username
               </label>
               <input
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                name="email"
+                name="username"
                 type="text"
-                placeholder="Email"
-                {...register("email", { required: true })}
+                placeholder="Username"
+                {...register("username", { required: true })}
               />
-              {errors.email && (
-                <span className="text-red-300">Email is required</span>
+              {errors.username && (
+                <span className="text-red-300">Username is required</span>
               )}
             </div>
             <div className="mb-6">
@@ -105,7 +104,7 @@ const login = ({ user }) => {
 
 export const getServerSideProps = withSession((context) => {
   const { req } = context;
-
+  // console.log(req.session.get("user") + " - test page login");
   if (req.session.get("user") && req.session.get("user").token) {
     return {
       redirect: {

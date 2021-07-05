@@ -24,6 +24,7 @@ const register = ({ user }) => {
             // username: data.username,
             // email: data.email,
             // password: data.password,
+            user_login: data.username,
             email: data.email,
             password: data.password,
           }),
