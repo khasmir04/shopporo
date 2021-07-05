@@ -18,7 +18,7 @@ const login = ({ user }) => {
       const result = await fetch(`/api/login`, {
         method: "POST",
         body: JSON.stringify({
-          username: data.username,
+          email: data.email,
           password: data.password,
         }),
         headers: {
@@ -45,19 +45,19 @@ const login = ({ user }) => {
             <div className="mb-4">
               <label
                 className="block text-gray-700 text-sm font-normal mb-2"
-                htmlFor="username"
+                htmlFor="email"
               >
-                Username
+                Email
               </label>
               <input
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                name="username"
+                name="email"
                 type="text"
-                placeholder="Username"
-                {...register("username", { required: true })}
+                placeholder="Email"
+                {...register("email", { required: true })}
               />
-              {errors.username && (
-                <span className="text-red-300">Username is required</span>
+              {errors.email && (
+                <span className="text-red-300">Email is required</span>
               )}
             </div>
             <div className="mb-6">
