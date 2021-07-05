@@ -50,6 +50,7 @@ export default nc()
 
       res.json(userInfo);
     } catch (error) {
+      console.log(error);
       const { response: fetchResponse } = error;
       if (fetchResponse) {
         return res
