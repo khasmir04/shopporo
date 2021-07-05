@@ -8,13 +8,14 @@ export default nc()
 
     try {
       const result = await fetch(
-        `${process.env.BACKEND_URL}/wp-json/jwt-auth/v1/token`,
+        // `${process.env.BACKEND_URL}/wp-json/jwt-auth/v1/token`,
+        `${process.env.BACKEND_URL}/?rest_route=/simple-jwt-login/v1/auth`,
         {
           method: "POST",
           body: JSON.stringify({
             // Username of a user on the WordPress website in which the REST API request
             // is being made to.
-            username: username,
+            email: username,
             // And the above user's password.
             password: password,
           }),
