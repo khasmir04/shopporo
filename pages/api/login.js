@@ -33,10 +33,22 @@ export default nc()
         // });
         return "User not found.";
       }
-      req.session.set("user", user);
+
+      const userInfo = await fetch(
+        `${process.env.BACKEND_URL}/?rest_route=/simple-jwt-login/v1/auth/validate`,
+        {
+          method: "GET",
+          headers: {
+            "Authorization": `${user.data.jwt}`
+          }
+        },
+      );
+
+      req.session.set("user", userInfo);
+
       await req.session.save();
 
-      res.json(user);
+      res.json(userInfo);
     } catch (error) {
       const { response: fetchResponse } = error;
       if (fetchResponse) {

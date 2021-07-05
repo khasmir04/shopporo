@@ -36,16 +36,38 @@ const Home = ({ user }) => {
     } catch (error) {
       console.log(error);
     }
+    // TOKEN REVOKE
+    // try {
+    //   await fetch(`${process.env.BACKEND_URL}/?rest_route=/simple-jwt-login/v1/auth/revoke&JWT={{YOUR_JWT}}`,{
+
+    //   })
+    // } catch (error) {
+
+    // }
   };
   // logout - khasmir
 
+  // const getDetails = async () => {
+  //   try {
+  //     const result = await fetch(
+  //       `${process.env.BACKEND_URL}/?rest_route=/simple-jwt-login/v1/auth/validate&JWT=${user.data.jwt}`,
+  //       {
+  //         method: "GET",
+  //       },
+  //     );
+  //   } catch (error) {
+  //     console.log("Getting details failed.")
+  //   }
+  // }
+
+  // console.log(result);
   return (
     <LayoutOne title="Home">
       <h1>Home</h1>
       <div>
         {user ? (
           <p>
-            Hello {user.user_nicename}!{" "}
+            Hello {user.data.jwt}!{" "}
             <a href="/api/logout" onClick={onLogout}>
               Logout
             </a>
@@ -74,6 +96,7 @@ const Home = ({ user }) => {
 
 export const getServerSideProps = withSession((context) => {
   const { req } = context;
+
   return {
     props: {
       user: req.session.get("user") || null,
