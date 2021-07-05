@@ -24,12 +24,12 @@ const register = ({ user }) => {
             // username: data.username,
             // email: data.email,
             // password: data.password,
-            AUTH_KEY: "testing",
             email: data.email,
             password: data.password,
           }),
           headers: {
             "Content-Type": "application/json",
+            "AUTH_KEY": "testing",
           },
         }
       );
