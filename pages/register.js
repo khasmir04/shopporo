@@ -16,11 +16,15 @@ const register = ({ user }) => {
   const onSubmit = async (data) => {
     try {
       const result = await fetch(
-        `${process.env.BACKEND_URL}/wp-json/wp/v2/users/register`,
+        // `${process.env.BACKEND_URL}/wp-json/wp/v2/users/register`,
+        `${process.env.BACKEND_URL}/?rest_route=/simple-jwt-login/v1/users`,
         {
           method: "POST",
           body: JSON.stringify({
-            username: data.username,
+            // username: data.username,
+            // email: data.email,
+            // password: data.password,
+            AUTH_KEY: "testing",
             email: data.email,
             password: data.password,
           }),
