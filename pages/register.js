@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useRef } from "react";
 import { withSession } from "../middlewares/session";
 import LayoutAuth from "../components/layouts/LayoutAuth";
 import Link from "next/link";
@@ -12,7 +12,11 @@ const register = ({ user }) => {
     register,
     handleSubmit,
     formState: { errors },
+    watch,
   } = useForm();
+
+  const password = useRef({});
+  password.current = watch("password", "");
 
   const onSubmit = async (data) => {
     try {
@@ -78,9 +82,23 @@ const register = ({ user }) => {
                 placeholder="Password"
                 {...register("password", { required: true })}
               />
-              {errors.email && (
+              {errors.password && (
                 <span className="text-red-300">Password is required</span>
               )}
+
+              <input className="mb-3 py-3 px-4 border border-gray-400 focus:outline-none rounded-md focus:ring-1 ring-cyan-500"
+                name="password_repeat"
+                type="password"
+                placeholder="Confirm password"
+                {...register("password_repeat", {
+                  required: true,
+                  validate: value =>
+                    value === password.current
+                })}
+              />
+              {errors.password_repeat && (
+                <span className="text-red-300">The passwords do not match</span>)}
+
               <button className="w-full bg-primary text-white p-3 rounded-lg font-semibold text-lg"
                 type="submit"
               >Register</button>

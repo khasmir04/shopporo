@@ -63,6 +63,9 @@ const login = ({ user }) => {
               <button className="w-full bg-secondary mt-8 mb-4 text-white p-3 rounded-lg font-semibold text-lg">Register</button>
             </Link>
           </form>
+          <p className="text-center text-gray-500 text-xs">
+            &copy;2020 Shopporo. All rights reserved.
+          </p>
           {/* <p className="text-center text-sm my-4">
           <span className="font-semibold text-center w-full">Create a Page</span> for a celebrity, band or business
         </p> */}
