@@ -7,10 +7,10 @@ import { Select } from "antd";
 
 function ShopContentHeader({ data, productPerPage }) {
   const { Option } = Select;
-  const dispatch = useDispatch();
-  const shopState = useSelector((state) => state.shopReducer);
+  // const dispatch = useDispatch();
+  // const shopState = useSelector((state) => state.shopReducer);
   const handleChange = (value) => {
-    dispatch(setSort(value));
+    // dispatch(setSort(value));
   };
   return (
     <div className="shop-content__header">
@@ -23,7 +23,7 @@ function ShopContentHeader({ data, productPerPage }) {
         <p>Filter by:</p>
         <Select
           className="shop-content__header-filter__select"
-          defaultValue={shopState.sort}
+          // defaultValue={shopState.sort}
           style={{ width: 250 / 16 + "em" }}
           onChange={handleChange}
         >

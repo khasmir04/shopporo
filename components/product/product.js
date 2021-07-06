@@ -1,43 +1,60 @@
-import Link from "next/link";
+import Link from 'next/link'
+import { Rate, Button, Tooltip, Skeleton, message, Modal, Spin } from 'antd'
+import classNames from 'classnames'
+import { useState } from 'react'
+import ShopQuickView from '../shop/ShopQuickView'
 
-const Product = () => {
+const Product = ({ data, productStyle }) => {
+  const [visible, setVisible] = useState(false)
+
   const renderStyleClass = () => {
-    const avaialeStyles = ["one", "two", "three"];
+    const avaialeStyles = ['one', 'two', 'three']
     if (avaialeStyles.includes(productStyle)) {
-      if (!productStyle || productStyle === "one") {
-        return "-style-one";
+      if (!productStyle || productStyle === 'one') {
+        return '-style-one'
       } else {
-        return "-style-" + productStyle;
+        return '-style-' + productStyle
       }
     } else {
-      return "-style-one";
+      return '-style-one'
     }
-  };
+  }
+
+  const showModal = () => {
+    setVisible(true)
+  }
+  const handleCancel = e => {
+    setVisible(false)
+  }
+  const handleImageLoaded = () => {
+    setImageLoading(false)
+  }
 
   return (
     <>
       <div className={`product ${renderStyleClass()}`}>
         <div className="product-image">
           <Link href={`/product/[slug]`} as={`/product/${data.slug}`}>
-            <a className={classNames({ loading: imageLoading })}>
+            {/* <a className={classNames({ loading: imageLoading })}> */}
+            <a>
               {data.thumbImage &&
-                data.thumbImage.map((item, index) => (
+                data.thumbImage.map(item => (
                   <img
-                    onLoad={handleImageLoaded}
-                    key={index}
+                    // onLoad={handleImageLoaded}
+                    key={item.id}
                     src={item}
                     alt="Product image"
                   />
                 ))}
             </a>
           </Link>
-          {imageLoading && (
+          {/* {imageLoading && (
             <div className="product-image-loading">
               <Spin size="large" />
             </div>
-          )}
-          {renderProductType()}
-          {productStyle === "two" ? (
+          )} */}
+          {/* {renderProductType()} */}
+          {productStyle === 'two' ? (
             <div className="product-button-group">
               <Tooltip title="Quick view">
                 <Button onClick={showModal} type="text">
@@ -45,46 +62,59 @@ const Product = () => {
                 </Button>
               </Tooltip>
               <Tooltip
+                // title={
+                //   productInWishlist ? "Remove from wishlist" : "Add to wishlist"
+                // }
                 title={
-                  productInWishlist ? "Remove from wishlist" : "Add to wishlist"
+                  Math.random() * 10 > 4
+                    ? 'Remove from wishlist'
+                    : 'Add to wishlist'
                 }
               >
                 <Button
                   className={`product-atw ${classNames({
-                    active: productInWishlist,
+                    active: true, //productInWishlist,
                   })}`}
                   type="text"
-                  onClick={() => onAddToWishlist(data)}
+                  // onClick={() => onAddToWishlist(data)}
                 >
                   <i className="icon_heart_alt" />
                 </Button>
               </Tooltip>
               <Tooltip title="Add to cart">
                 <Button
-                  disabled={avaiableQuantity === 0}
+                  // disabled={avaiableQuantity === 0}
+                  disabled={false}
                   type="text"
-                  onClick={() => onAddToCart(data)}
+                  // onClick={() => onAddToCart(data)}
                 >
                   <i className="icon_bag_alt" />
                 </Button>
               </Tooltip>
             </div>
           ) : null}
-          {!productStyle || productStyle === "one" ? (
+          {!productStyle || productStyle === 'one' ? (
             <>
               <Tooltip
                 placement="left"
+                // title={
+                //   productInWishlist ? "Remove from wishlist" : "Add to wishlist"
+                // }
+
                 title={
-                  productInWishlist ? "Remove from wishlist" : "Add to wishlist"
+                  Math.random() * 10 > 4
+                    ? 'Remove from wishlist'
+                    : 'Add to wishlist'
                 }
               >
                 <Button
                   className={`product-atw ${classNames({
-                    active: productInWishlist,
+                    // active: productInWishlist,
+                    active: true,
                   })}`}
                   type="text"
                   shape="circle"
-                  onClick={() => onAddToWishlist(data)}
+                  // onClick={() => onAddToWishlist(data)}
                 >
                   <i className="icon_heart_alt" />
                 </Button>
@@ -97,46 +127,38 @@ const Product = () => {
           ) : null}
         </div>
         <div className="product-content">
-          <Link
-            href={process.env.PUBLIC_URL + `/product/[slug]`}
-            as={process.env.PUBLIC_URL + `/product/${data.slug}`}
-          >
+          <Link href={`/product/[slug]`} as={`/product/${data.slug}`}>
             <a className="product-name">{data.name}</a>
           </Link>
           <div className="product-rate">
             <Rate defaultValue={data.rate} disabled />
-            <span className="product-rate-quantity">(06)</span>
+            <span className="product-rate-quantity">
+              ({Math.ceil(Math.random() * 15)})
+            </span>
           </div>
           <div className="product-content__footer">
             <div className="product-content__footer-price">
               <h5 className="product-price">
-                {data.discount
-                  ? formatCurrency(
-                    data.price - data.discount,
-                    locales,
-                    currency
-                  )
-                  : formatCurrency(data.price, locales, currency)}
+                ${data.discount ? data.price - data.discount : data.price}
               </h5>
-              {data.discount && (
-                <span>{formatCurrency(data.price, locales, currency)}</span>
-              )}
+              {data.discount && <span>{data.price}</span>}
             </div>
-            {!productStyle || productStyle === "one" ? (
+            {!productStyle || productStyle === 'one' ? (
               <Tooltip title="Add to cart">
                 <Button
-                  disabled={avaiableQuantity === 0}
+                  // disabled={avaiableQuantity === 0}
+                  disabled={false}
                   className="product-atc"
                   type="text"
                   shape="circle"
-                  onClick={() => onAddToCart(data)}
+                  // onClick={() => onAddToCart(data)}
                 >
                   <i className="icon_bag_alt" />
                 </Button>
               </Tooltip>
             ) : null}
           </div>
-          {productStyle === "three" ? (
+          {productStyle === 'three' ? (
             <div className="product-button-group">
               <div className="product-button-group__wrapper">
                 <Tooltip placement="top" title="Quick view">
@@ -146,27 +168,35 @@ const Product = () => {
                 </Tooltip>
                 <Tooltip
                   placement="top"
+                  // title={
+                  //   productInWishlist
+                  //     ? "Remove from wishlist"
+                  //     : "Add to wishlist"
+                  // }
+
                   title={
-                    productInWishlist
-                      ? "Remove from wishlist"
-                      : "Add to wishlist"
+                    Math.random() * 10 > 4
+                      ? 'Remove from wishlist'
+                      : 'Add to wishlist'
                   }
                 >
                   <Button
                     shape="circle"
                     className={`product-atw ${classNames({
-                      active: productInWishlist,
+                      active: true,
+                      // active: productInWishlist,
                     })}`}
-                    onClick={() => onAddToWishlist(data)}
+                    // onClick={() => onAddToWishlist(data)}
                   >
                     <i className="icon_heart_alt" />
                   </Button>
                 </Tooltip>
                 <Tooltip placement="top" title="Add to cart">
                   <Button
-                    disabled={avaiableQuantity === 0}
+                    // disabled={avaiableQuantity === 0}
+                    disabled={false}
                     shape="circle"
-                    onClick={() => onAddToCart(data)}
+                    // onClick={() => onAddToCart(data)}
                   >
                     <i className="icon_bag_alt" />
                   </Button>
@@ -186,7 +216,7 @@ const Product = () => {
         <ShopQuickView setModalVisible={setVisible} data={data} />
       </Modal>
     </>
-  );
-};
+  )
+}
 
-export default Product;
+export default Product

@@ -10,11 +10,12 @@ const ShopLayout = ({
   shopContentResponsive,
   productResponsive,
   fiveColumn,
-  // data,
+  data,
   productPerPage,
-  // productStyle,
+  productStyle,
   // containerType,
 }) => {
+
   return (
     <div className="shop-layout">
       {/* <Container type={containerType}> */}
@@ -24,13 +25,13 @@ const ShopLayout = ({
             <ShopSidebar />
           </Col>
           <Col className="gutter-row" {...shopContentResponsive}>
-            {/* <ShopContent
+            <ShopContent
               productStyle={productStyle}
               productPerPage={productPerPage}
               fiveColumn={fiveColumn}
               productResponsive={productResponsive}
               data={data}
-            /> */}
+            />
           </Col>
         </Row>
       </Container>
