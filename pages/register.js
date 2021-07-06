@@ -133,7 +133,7 @@ const register = ({ user }) => {
 export const getServerSideProps = withSession((context) => {
   const { req } = context;
 
-  if (req.session.get("user") && req.session.get("user").token) {
+  if (req.session.get("user") && req.session.get("user").data.jwt[0].token) {
     return {
       redirect: {
         permanent: false,

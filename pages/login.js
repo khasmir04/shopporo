@@ -105,7 +105,7 @@ const login = ({ user }) => {
 export const getServerSideProps = withSession((context) => {
   const { req } = context;
   // console.log(req.session.get("user") + " - test page login");
-  if (req.session.get("user") && req.session.get("user").token) {
+  if (req.session.get("user") && req.session.get("user").data.jwt[0].token) {
     return {
       redirect: {
         permanent: false,
