@@ -11,7 +11,7 @@ import { useState, useEffect } from "react";
 
 const ShopContentProduct = ({
   productResponsive,
-  fiveColumn,
+  fourColumn,
   data,
   productPerPage,
   productStyle,
@@ -74,7 +74,7 @@ const ShopContentProduct = ({
                   .map((product, index) => (
                     <Col
                       key={index}
-                      className={classNames({ "five-col": fiveColumn })}
+                      className={classNames({ "four-col": fourColumn })}
                       {...productResponsive}
                     >
                       <Product data={product} productStyle={productStyle} />
@@ -105,7 +105,7 @@ const ShopContentProduct = ({
     //     {currentData.slice(0, productPerPage).map((product, index) => (
     //       <Col
     //         key={index}
-    //         className={classNames({ 'five-col': fiveColumn })}
+    //         className={classNames({ 'five-col': fourColumn })}
     //         {...productResponsive}
     //       >
     //         <Product data={product} productStyle={productStyle} />

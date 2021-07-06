@@ -9,7 +9,7 @@ const ShopLayout = ({
   shopSidebarResponsive,
   shopContentResponsive,
   productResponsive,
-  fiveColumn,
+  fourColumn,
   data,
   productPerPage,
   productStyle,
@@ -27,7 +27,7 @@ const ShopLayout = ({
             <ShopContent
               productStyle={productStyle}
               productPerPage={productPerPage}
-              fiveColumn={fiveColumn}
+              fourColumn={fourColumn}
               productResponsive={productResponsive}
               data={data}
             />

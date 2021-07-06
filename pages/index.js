@@ -1992,11 +1992,11 @@ const Home = ({ user }) => {
       </div>
       <Banners />
       <ShopLayout
-        fiveColumn
+        fourColumn
         shopSidebarResponsive={{ xs: 24, lg: 4 }}
         shopContentResponsive={{ xs: 24, lg: 20 }}
         productResponsive={{ xs: 12, sm: 8, md: 6 }}
-        productPerPage={15}
+        productPerPage={16}
         data={[...data]}
       />
     </LayoutOne>
