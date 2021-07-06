@@ -48,7 +48,7 @@
       background-color: #000;
       padding: emCal(12, 5) emCal(12, 10);
       &.-sale {
-        background-color: setColor(red);
+        background-color: setColor(brandBlue);
       }
     }
   }
@@ -103,7 +103,7 @@
           }
         }
         &:hover {
-          background-color: setColor(red);
+          background-color: setColor(brandBlue);
           color: #fff;
         }
       }
@@ -129,11 +129,11 @@
         height: emCal(14, 30);
         width: emCal(14, 30);
         &:hover {
-          background-color: setColor(red);
+          background-color: setColor(brandBlue);
           color: #fff;
         }
         &.active {
-          background-color: setColor(red);
+          background-color: setColor(brandBlue);
           color: #fff;
         }
       }
@@ -150,7 +150,7 @@
         font-weight: 700;
         letter-spacing: emCal(12, 1.2);
         &:hover {
-          background-color: setColor(red);
+          background-color: setColor(brandBlue);
           color: #fff;
         }
       }

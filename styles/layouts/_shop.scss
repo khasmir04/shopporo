@@ -145,9 +145,9 @@
               line-height: emCal(15, 40);
             }
             &-active {
-              background-color: setShadeColor(dark);
+              background-color: setShadeColor(sBlue);
               &:hover {
-                background-color: setShadeColor(dark);
+                background-color: setShadeColor(sBlue);
               }
               a,
               button {

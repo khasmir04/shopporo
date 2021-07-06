@@ -1,34 +1,34 @@
-import Link from 'next/link'
-import { Rate, Button, Tooltip, Skeleton, message, Modal, Spin } from 'antd'
-import classNames from 'classnames'
-import { useState } from 'react'
-import ShopQuickView from '../shop/ShopQuickView'
+import Link from "next/link";
+import { Rate, Button, Tooltip, Skeleton, message, Modal, Spin } from "antd";
+import classNames from "classnames";
+import { useState } from "react";
+import ShopQuickView from "../shop/ShopQuickView";
 
 const Product = ({ data, productStyle }) => {
-  const [visible, setVisible] = useState(false)
+  const [visible, setVisible] = useState(false);
 
   const renderStyleClass = () => {
-    const avaialeStyles = ['one', 'two', 'three']
+    const avaialeStyles = ["one", "two", "three"];
     if (avaialeStyles.includes(productStyle)) {
-      if (!productStyle || productStyle === 'one') {
-        return '-style-one'
+      if (!productStyle || productStyle === "one") {
+        return "-style-one";
       } else {
-        return '-style-' + productStyle
+        return "-style-" + productStyle;
       }
     } else {
-      return '-style-one'
+      return "-style-one";
     }
-  }
+  };
 
   const showModal = () => {
-    setVisible(true)
-  }
-  const handleCancel = e => {
-    setVisible(false)
-  }
+    setVisible(true);
+  };
+  const handleCancel = (e) => {
+    setVisible(false);
+  };
   const handleImageLoaded = () => {
-    setImageLoading(false)
-  }
+    setImageLoading(false);
+  };
 
   return (
     <>
@@ -38,10 +38,10 @@ const Product = ({ data, productStyle }) => {
             {/* <a className={classNames({ loading: imageLoading })}> */}
             <a>
               {data.thumbImage &&
-                data.thumbImage.map(item => (
+                data.thumbImage.map((item, index) => (
                   <img
                     // onLoad={handleImageLoaded}
-                    key={item.id}
+                    key={index}
                     src={item}
                     alt="Product image"
                   />
@@ -54,7 +54,7 @@ const Product = ({ data, productStyle }) => {
             </div>
           )} */}
           {/* {renderProductType()} */}
-          {productStyle === 'two' ? (
+          {productStyle === "two" ? (
             <div className="product-button-group">
               <Tooltip title="Quick view">
                 <Button onClick={showModal} type="text">
@@ -67,8 +67,8 @@ const Product = ({ data, productStyle }) => {
                 // }
                 title={
                   Math.random() * 10 > 4
-                    ? 'Remove from wishlist'
-                    : 'Add to wishlist'
+                    ? "Remove from wishlist"
+                    : "Add to wishlist"
                 }
               >
                 <Button
@@ -93,7 +93,7 @@ const Product = ({ data, productStyle }) => {
               </Tooltip>
             </div>
           ) : null}
-          {!productStyle || productStyle === 'one' ? (
+          {!productStyle || productStyle === "one" ? (
             <>
               <Tooltip
                 placement="left"
@@ -103,8 +103,8 @@ const Product = ({ data, productStyle }) => {
 
                 title={
                   Math.random() * 10 > 4
-                    ? 'Remove from wishlist'
-                    : 'Add to wishlist'
+                    ? "Remove from wishlist"
+                    : "Add to wishlist"
                 }
               >
                 <Button
@@ -128,7 +128,7 @@ const Product = ({ data, productStyle }) => {
         </div>
         <div className="product-content">
           <Link href={`/product/[slug]`} as={`/product/${data.slug}`}>
-            <a className="product-name">{data.name}</a>
+            <a>{data.name}</a>
           </Link>
           <div className="product-rate">
             <Rate defaultValue={data.rate} disabled />
@@ -143,7 +143,7 @@ const Product = ({ data, productStyle }) => {
               </h5>
               {data.discount && <span>{data.price}</span>}
             </div>
-            {!productStyle || productStyle === 'one' ? (
+            {!productStyle || productStyle === "one" ? (
               <Tooltip title="Add to cart">
                 <Button
                   // disabled={avaiableQuantity === 0}
@@ -158,7 +158,7 @@ const Product = ({ data, productStyle }) => {
               </Tooltip>
             ) : null}
           </div>
-          {productStyle === 'three' ? (
+          {productStyle === "three" ? (
             <div className="product-button-group">
               <div className="product-button-group__wrapper">
                 <Tooltip placement="top" title="Quick view">
@@ -176,8 +176,8 @@ const Product = ({ data, productStyle }) => {
 
                   title={
                     Math.random() * 10 > 4
-                      ? 'Remove from wishlist'
-                      : 'Add to wishlist'
+                      ? "Remove from wishlist"
+                      : "Add to wishlist"
                   }
                 >
                   <Button
@@ -216,7 +216,7 @@ const Product = ({ data, productStyle }) => {
         <ShopQuickView setModalVisible={setVisible} data={data} />
       </Modal>
     </>
-  )
-}
+  );
+};
 
-export default Product
+export default Product;
