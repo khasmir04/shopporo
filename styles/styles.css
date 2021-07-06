@@ -21,6 +21,10 @@
   }
 }
 
+body {
+  font-family: "Lato", sans-serif !important;
+}
+
 html,
 body {
   padding: 0;
