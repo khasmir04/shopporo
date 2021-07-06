@@ -7,16 +7,13 @@ export default nc()
     const { username, password } = req.body;
 
     try {
+      // Login User
       const result = await fetch(
-        // `${process.env.BACKEND_URL}/wp-json/jwt-auth/v1/token`,
         `${process.env.BACKEND_URL}/?rest_route=/simple-jwt-login/v1/auth`,
         {
           method: "POST",
           body: JSON.stringify({
-            // Username of a user on the WordPress website in which the REST API request
-            // is being made to.
             username: username,
-            // And the above user's password.
             password: password,
           }),
           headers: {
@@ -26,14 +23,12 @@ export default nc()
       );
       const user = await result.json();
 
+      // Check token after loggin in
       if (!user.data.jwt) {
-        // return res.status(401).json({
-        //   statusCode: 401,
-        //   message: "Token not confirmed",
-        // });
         return "User not found.";
       }
 
+      // Get User Details
       const userInfo = await fetch(
         `${process.env.BACKEND_URL}/?rest_route=/simple-jwt-login/v1/auth/validate`,
         {
@@ -43,14 +38,14 @@ export default nc()
           }
         },
       );
+      const userDetails = await userInfo.json();
 
-      req.session.set("user", userInfo);
-
+      // Saving and passing data
+      req.session.set("user", userDetails);
       await req.session.save();
+      res.json(userDetails);
 
-      res.json(userInfo);
     } catch (error) {
-      console.log(error);
       const { response: fetchResponse } = error;
       if (fetchResponse) {
         return res

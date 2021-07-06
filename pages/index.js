@@ -67,7 +67,7 @@ const Home = ({ user }) => {
       <div>
         {user ? (
           <p>
-            Hello {user.data.jwt}!{" "}
+            Hello {user.data.user.display_name}!{" "}
             <a href="/api/logout" onClick={onLogout}>
               Logout
             </a>
