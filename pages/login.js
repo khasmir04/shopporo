@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { withSession } from "../middlewares/session";
 import Link from "next/link";
+import LayoutAuth from "../components/layouts/LayoutAuth";
 
 const login = ({ user }) => {
   const router = useRouter();
@@ -31,74 +32,54 @@ const login = ({ user }) => {
   };
 
   return (
-    <>
-      <div className="flex items-center justify-center">
-        <div className="w-full max-w-md">
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            className="bg-white shadow-lg rounded px-12 pt-6 pb-8 mb-4"
-          >
-            <div className="text-gray-800 text-2xl flex justify-center border-b-2 py-2 mb-4">
-              Ecommerce Login
-            </div>
-            <div className="mb-4">
-              <label
-                className="block text-gray-700 text-sm font-normal mb-2"
-                htmlFor="username"
-              >
-                Username
-              </label>
-              <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                name="username"
-                type="text"
-                placeholder="Username"
-                {...register("username", { required: true })}
-              />
-              {errors.username && (
-                <span className="text-red-300">Username is required</span>
-              )}
-            </div>
-            <div className="mb-6">
-              <label
-                className="block text-gray-700 text-sm font-normal mb-2"
-                htmlFor="password"
-              >
-                Password
-              </label>
-              <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                type="password"
-                placeholder="Password"
-                name="password"
-                {...register("password", {
-                  required: true,
-                })}
-              />
-              {errors.password?.type === "required" && (
-                <span className="text-red-300">Password is required</span>
-              )}
-            </div>
-            <div className="flex items-center justify-between">
-              <button
-                className="px-4 py-2 rounded text-white inline-block shadow-lg bg-blue-500 hover:bg-blue-600 focus:bg-blue-700"
-                type="submit"
-              >
-                Sign In
-              </button>
-              <Link href="/register">
-                <a className="inline-block align-baseline font-normal text-sm text-blue-500 hover:text-blue-800">
-                  Register
-                </a>
-              </Link>
-            </div>
-          </form>
-          <p className="text-center text-gray-500 text-xs">
-            &copy;2020 Ecommerce. All rights reserved.
-          </p>
+    <LayoutAuth title="Shopporo | Login">
+      <div className="p-20 w-screen flex flex-col-reverse md:flex-row items-center justify-center bg-gray-200">
+        <div className="lg:w-1/2 text-3xl text-center md:text-left">
+          <h1 className="text-5xl text-blue-500 font-bold">Shopporo</h1>
+          <p>Buy high quality products from all around the world.</p>
         </div>
+        <div className="lg:w-1/2 container mx-auto flex flex-col items-center">
+          <form className="shadow-lg w-96 p-4 flex flex-col bg-white rounded-lg"
+            onSubmit={handleSubmit(onSubmit)}
+          >
+            <input className="mb-3 py-3 px-4 border border-gray-400 focus:outline-none rounded-md focus:ring-1 ring-cyan-500"
+              name="username"
+              type="text"
+              placeholder="Username"
+              {...register("username", { required: true })}
+            />
+            <input className="mb-3 py-3 px-4 border border-gray-400 focus:outline-none rounded-md focus:ring-1 ring-cyan-500"
+              name="password"
+              type="password"
+              placeholder="Password"
+              {...register("password", { required: true })}
+            />
+            <button className="w-full bg-primary text-white p-3 rounded-lg font-semibold text-lg"
+              type="submit"
+            >Login</button>
+            <a className="text-blue-400 text-center my-2">Forgot Pasword?</a>
+            <hr />
+            <Link href="/register">
+              <button className="w-full bg-secondary mt-8 mb-4 text-white p-3 rounded-lg font-semibold text-lg">Register</button>
+            </Link>
+          </form>
+          {/* <p className="text-center text-sm my-4">
+          <span className="font-semibold text-center w-full">Create a Page</span> for a celebrity, band or business
+        </p> */}
+        </div>
+        {/* <ToastContainer
+        position="top-right"
+        autoClose={4000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        /> */}
       </div>
-    </>
+    </LayoutAuth>
   );
 };
 
