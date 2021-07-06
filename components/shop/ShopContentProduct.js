@@ -63,7 +63,7 @@ const ShopContentProduct = ({
   return (
     <div className="shop-content__product">
       {!currentData ? (
-        <Empty description="No products in this category" />
+        <Empty description={"No products in this category"} />
       ) : (
         <>
           {currentData.length > 0 ? (
@@ -83,6 +83,8 @@ const ShopContentProduct = ({
               </Row>
               {currentData.length >= productPerPage && (
                 <Pagination
+                  className={"mt-10"}
+                  showSizeChanger={false}
                   classNames="shop-content__product-pagination"
                   defaultCurrent={1}
                   current={page}
@@ -94,25 +96,11 @@ const ShopContentProduct = ({
               )}
             </>
           ) : (
-            <Empty />
+            <Empty description={"No products in this category"} />
           )}
         </>
       )}
     </div>
-
-    // <>
-    //   <Row gutter={[{ xs: 5, sm: 5, xl: 15, xxl: 30 }, 30]}>
-    //     {currentData.slice(0, productPerPage).map((product, index) => (
-    //       <Col
-    //         key={index}
-    //         className={classNames({ 'five-col': fourColumn })}
-    //         {...productResponsive}
-    //       >
-    //         <Product data={product} productStyle={productStyle} />
-    //       </Col>
-    //     ))}
-    //   </Row>
-    // </>
   );
 };
 
