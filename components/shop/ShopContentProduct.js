@@ -71,13 +71,17 @@ const ShopContentProduct = ({
               <Row gutter={[{ xs: 5, sm: 5, xl: 15, xxl: 30 }, 30]}>
                 {currentData
                   .slice(offset, offset + productPerPage)
-                  .map((product, index) => (
+                  .map((product) => (
                     <Col
-                      key={index}
+                      key={product.id}
                       className={classNames({ "four-col": fourColumn })}
                       {...productResponsive}
                     >
-                      <Product data={product} productStyle={productStyle} />
+                      <Product
+                        data={product}
+                        productStyle={productStyle}
+                        key={product.id}
+                      />
                     </Col>
                   ))}
               </Row>

@@ -1968,8 +1968,6 @@ const Home = ({ user }) => {
     },
   ];
 
-  console.log(data);
-
   return (
     <LayoutOne title="Home">
       <h1>Home</h1>
