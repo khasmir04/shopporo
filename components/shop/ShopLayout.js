@@ -15,7 +15,6 @@ const ShopLayout = ({
   productStyle,
   // containerType,
 }) => {
-
   return (
     <div className="shop-layout">
       {/* <Container type={containerType}> */}
@@ -37,6 +36,6 @@ const ShopLayout = ({
       </Container>
     </div>
   );
-}
+};
 
 export default ShopLayout;
