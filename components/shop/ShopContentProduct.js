@@ -87,8 +87,8 @@ const ShopContentProduct = ({
               </Row>
               {currentData.length >= productPerPage && (
                 <Pagination
-                  className={"mt-10"}
                   showSizeChanger={false}
+                  className={"mt-10 flex justify-center"}
                   classNames="shop-content__product-pagination"
                   defaultCurrent={1}
                   current={page}

@@ -110,7 +110,7 @@ const Product = ({ data, productStyle }) => {
                 <Button
                   className={`product-atw ${classNames({
                     // active: productInWishlist,
-                    active: true,
+                    active: Math.ceil(Math.random() * 10 > 4),
                   })}`}
                   type="text"
                   shape="circle"
@@ -128,7 +128,7 @@ const Product = ({ data, productStyle }) => {
         </div>
         <div className="product-content">
           <Link href={`/product/[slug]`} as={`/product/${data.slug}`}>
-            <a>{data.name}</a>
+            <a className="product-name">{data.name}</a>
           </Link>
           <div className="product-rate">
             <Rate defaultValue={data.rate} disabled />
