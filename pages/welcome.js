@@ -20,6 +20,9 @@ const Home = ({ user }) => {
 
   return (
     <div>
+      <title>
+        Shopporo
+      </title>
       <h1>Home</h1>
       {user ? (
         <p>

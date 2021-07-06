@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { withSession } from "../middlewares/session";
+import LayoutAuth from "../components/layouts/LayoutAuth";
 import Link from "next/link";
 
 const register = ({ user }) => {
@@ -42,24 +43,18 @@ const register = ({ user }) => {
 
   return (
     <>
-      <div className="flex items-center justify-center">
-        <div className="w-full max-w-md">
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            className="bg-white shadow-lg rounded px-12 pt-6 pb-8 mb-4"
-          >
-            <div className="text-gray-800 text-2xl flex justify-center border-b-2 py-2 mb-4">
-              Ecommerce Register
+      <LayoutAuth title="Shopporo | Register">
+        <div className="flex items-center justify-center p-14">
+          <div className="w-full max-w-md">
+            <div className="flex items-center justify-center mb-4">
+              <h4 className="text-3xl">Create an account</h4>
             </div>
-            <div className="mb-4">
-              <label
-                className="block text-gray-700 text-sm font-normal mb-2"
-                htmlFor="username"
-              >
-                Username
-              </label>
-              <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="shadow-lg w-96 p-4 flex flex-col bg-white rounded-lg mx-auto"
+            >
+              {/* NEW DESIGN */}
+              <input className="mb-3 py-3 px-4 border border-gray-400 focus:outline-none rounded-md focus:ring-1 ring-cyan-500"
                 name="username"
                 type="text"
                 placeholder="Username"
@@ -68,64 +63,39 @@ const register = ({ user }) => {
               {errors.username && (
                 <span className="text-red-300">Username is required</span>
               )}
-            </div>
-            <div className="mb-4">
-              <label
-                className="block text-gray-700 text-sm font-normal mb-2"
-                htmlFor="email"
-              >
-                Email
-              </label>
-              <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+              <input className="mb-3 py-3 px-4 border border-gray-400 focus:outline-none rounded-md focus:ring-1 ring-cyan-500"
                 name="email"
                 type="email"
-                placeholder="email"
+                placeholder="Email"
                 {...register("email", { required: true })}
               />
               {errors.email && (
-                <span className="text-red-300">email is required</span>
+                <span className="text-red-300">Email is required</span>
               )}
-            </div>
-            <div className="mb-6">
-              <label
-                className="block text-gray-700 text-sm font-normal mb-2"
-                htmlFor="password"
-              >
-                Password
-              </label>
-              <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+              <input className="mb-3 py-3 px-4 border border-gray-400 focus:outline-none rounded-md focus:ring-1 ring-cyan-500"
+                name="password"
                 type="password"
                 placeholder="Password"
-                name="password"
-                {...register("password", {
-                  required: true,
-                })}
+                {...register("password", { required: true })}
               />
-              {errors.password?.type === "required" && (
+              {errors.email && (
                 <span className="text-red-300">Password is required</span>
               )}
-            </div>
-            <div className="flex items-center justify-between">
-              <button
-                className="px-4 py-2 rounded text-white inline-block shadow-lg bg-blue-500 hover:bg-blue-600 focus:bg-blue-700"
+              <button className="w-full bg-primary text-white p-3 rounded-lg font-semibold text-lg"
                 type="submit"
-              >
-                Register
-              </button>
+              >Register</button>
+              <div className="text-blue-400 text-center my-2">Already have an account?</div>
+              <hr />
               <Link href="/login">
-                <a className="inline-block align-baseline font-normal text-sm text-blue-500 hover:text-blue-800">
-                  Log In
-                </a>
+                <button className="w-full bg-secondary mt-4 mb-4 text-white p-3 rounded-lg font-semibold text-lg">Login</button>
               </Link>
-            </div>
-          </form>
-          <p className="text-center text-gray-500 text-xs">
-            &copy;2020 Ecommerce. All rights reserved.
-          </p>
+            </form>
+            <p className="text-center text-gray-500 text-xs">
+              &copy;2020 Shopporo. All rights reserved.
+            </p>
+          </div>
         </div>
-      </div>
+      </LayoutAuth>
     </>
   );
 };
@@ -133,7 +103,7 @@ const register = ({ user }) => {
 export const getServerSideProps = withSession((context) => {
   const { req } = context;
 
-  if (req.session.get("user") && req.session.get("user").token) {
+  if (req.session.get("user") && req.session.get("user").data.jwt[0].token) {
     return {
       redirect: {
         permanent: false,
