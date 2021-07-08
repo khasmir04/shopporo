@@ -34,10 +34,7 @@ const Product = ({ data, productStyle }) => {
     <>
       <div className={`product ${renderStyleClass()}`}>
         <div className="product-image">
-          <Link
-            href={`${process.env.PUBLIC_URL}/product/[slug]`}
-            as={`${process.env.PUBLIC_URL}/product/${data.slug}`}
-          >
+          <Link href={`/product/[slug]`} as={`/product/${data.slug}`}>
             <a className="">
               {/* <a className={classNames({ loading: imageLoading })}> */}
               {/* <a> */}
@@ -137,10 +134,7 @@ const Product = ({ data, productStyle }) => {
           ) : null}
         </div>
         <div className="product-content">
-          <Link
-            href={`${process.env.PUBLIC_URL}/product/[slug]`}
-            as={`${process.env.PUBLIC_URL}/product/${data.slug}`}
-          >
+          <Link href={`/product/[slug]`} as={`/product/${data.slug}`}>
             <a className="product-name">{data.name}</a>
           </Link>
           <div className="product-rate">
