@@ -11,7 +11,7 @@ import { useState, useEffect } from "react";
 
 const ShopContentProduct = ({
   productResponsive,
-  fourColumn,
+  fiveColumn,
   data,
   productPerPage,
   productStyle,
@@ -96,7 +96,7 @@ const ShopContentProduct = ({
                   .map((product) => (
                     <Col
                       key={product.id}
-                      className={classNames({ "four-col": fourColumn })}
+                      className={classNames({ "five-col": fiveColumn })}
                       {...productResponsive}
                     >
                       <Product

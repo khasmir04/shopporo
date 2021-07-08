@@ -24,13 +24,11 @@ const Home = ({ user }) => {
   // );
 
   const [data, setData] = useState([]);
-  const [products, setProducts] = useState([]);
-  let sampleRes;
 
   const fetchData = async () => {
     try {
       const res = await fetch(
-        `${process.env.BACKEND_URL}/wp-json/public-woo/v3/products`,
+        `${process.env.BACKEND_URL}/wp-json/public-woo/v3/products/?per_page=100`,
         {
           method: "GET",
         }
@@ -48,37 +46,42 @@ const Home = ({ user }) => {
 
       // console.log("Res:", res.headers.get("x-wp-total"));
       const result = await res.json();
-      // sampleRes = res.headers["x-wp-total"];
-      console.log(result);
-      // setData(() => [...result]);
+      setData(result);
+      console.log("index.js", data);
     } catch (error) {
       console.log("Fetching products failed:", error);
     }
   };
 
-  useEffect(() => {
-    fetchData();
-  }, [data]);
-
-  const getData = async (offSet) => {
+  useEffect(async () => {
     try {
       const res = await fetch(
-        `${process.env.BACKEND_URL}/wp-json/public-woo/v3/products/?per_page=16&offset=${offSet}`,
+        `${process.env.BACKEND_URL}/wp-json/public-woo/v3/products/?per_page=100`,
         {
           method: "GET",
         }
       );
 
-      const result = await res.json();
+      // const productReportTotal = await fetch(
+      //   `${process.env.BACKEND_URL}/wp-json/public-woo/v2/reports/products/totals`,
+      //   {
+      //     method: "GET",
+      //     headers: {
+      //       Authorization: "Bearer ",
+      //     },
+      //   }
+      // );
 
-      // setProducts(result);
+      // console.log("Res:", res.headers.get("x-wp-total"));
+      const result = await res.json();
+      setData(result);
     } catch (error) {
       console.log("Fetching products failed:", error);
     }
-  };
+  }, []);
 
   // // logout - khasmir
-  // const router = useRouter();
+  const router = useRouter();
 
   const onLogout = async (e) => {
     e.preventDefault();
@@ -2020,7 +2023,7 @@ const Home = ({ user }) => {
 
   return (
     <LayoutOne title="Home">
-      <h1>Home - {sampleRes}</h1>
+      <h1>Home</h1>
       <div>
         {user ? (
           <p>
@@ -2040,12 +2043,12 @@ const Home = ({ user }) => {
       </div>
       <Banners />
       <ShopLayout
-        fourColumn
+        fiveColumn
         shopSidebarResponsive={{ xs: 24, lg: 4 }}
         shopContentResponsive={{ xs: 24, lg: 20 }}
         productResponsive={{ xs: 12, sm: 8, md: 6 }}
-        productPerPage={16}
-        data={[...data]}
+        productPerPage={15}
+        data={data}
       />
     </LayoutOne>
   );

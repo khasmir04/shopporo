@@ -33,22 +33,31 @@ const Product = ({ data, productStyle }) => {
   return (
     <>
       <div className={`product ${renderStyleClass()}`}>
-        <div className="product-image w-[300px] h-[300px]">
+        <div className="product-image">
           <Link
             href={`${process.env.PUBLIC_URL}/product/[slug]`}
             as={`${process.env.PUBLIC_URL}/product/${data.slug}`}
           >
-            {/* <a className={classNames({ loading: imageLoading })}> */}
-            <a>
-              {data.images &&
-                data.images.map((image, index) => (
-                  <img
-                    // onLoad={handleImageLoaded}
-                    key={index}
-                    src={image.src}
-                    alt="Product image"
-                  />
-                ))}
+            <a className="">
+              {/* <a className={classNames({ loading: imageLoading })}> */}
+              {/* <a> */}
+              {data.images.length > 1
+                ? data.images.slice(0, 2).map((image, index) => (
+                    <img
+                      // onLoad={handleImageLoaded}
+                      key={index}
+                      src={image.src}
+                      alt="Product image"
+                    />
+                  ))
+                : [1, 2].map((image, index) => (
+                    <img
+                      // onLoad={handleImageLoaded}
+                      key={index}
+                      src={`/assets/images/products/clothes/1.png`}
+                      alt="Product image"
+                    />
+                  ))}
 
               {/* <img
                 // onLoad={handleImageLoaded}
@@ -176,11 +185,7 @@ const Product = ({ data, productStyle }) => {
                   //     : "Add to wishlist"
                   // }
 
-                  title={
-                    Math.random() * 10 > 4
-                      ? "Remove from wishlist"
-                      : "Add to wishlist"
-                  }
+                  title={"Add to wishlist"}
                 >
                   <Button
                     shape="circle"

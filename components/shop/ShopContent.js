@@ -3,7 +3,7 @@ import ShopContentHeader from "./ShopContentHeader";
 import ShopContentProduct from "./ShopContentProduct";
 
 function ShopContent({
-  fourColumn,
+  fiveColumn,
   productResponsive,
   data,
   productPerPage,
@@ -14,7 +14,7 @@ function ShopContent({
       <ShopContentHeader productPerPage={productPerPage} data={data} />
       <ShopContentProduct
         productStyle={productStyle}
-        fourColumn={fourColumn}
+        fiveColumn={fiveColumn}
         productResponsive={productResponsive}
         data={data}
         productPerPage={productPerPage}
