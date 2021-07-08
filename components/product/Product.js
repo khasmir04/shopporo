@@ -33,22 +33,28 @@ const Product = ({ data, productStyle }) => {
   return (
     <>
       <div className={`product ${renderStyleClass()}`}>
-        <div className="product-image">
+        <div className="product-image w-[300px] h-[300px]">
           <Link
             href={`${process.env.PUBLIC_URL}/product/[slug]`}
             as={`${process.env.PUBLIC_URL}/product/${data.slug}`}
           >
             {/* <a className={classNames({ loading: imageLoading })}> */}
             <a>
-              {data.thumbImage &&
-                data.thumbImage.map((item, index) => (
+              {data.images &&
+                data.images.map((image, index) => (
                   <img
                     // onLoad={handleImageLoaded}
                     key={index}
-                    src={item}
+                    src={image.src}
                     alt="Product image"
                   />
                 ))}
+
+              {/* <img
+                // onLoad={handleImageLoaded}
+                src={`/assets/images/products/clothes/1.png`}
+                alt="Product image"
+              /> */}
             </a>
           </Link>
           {/* {imageLoading && (
@@ -129,15 +135,15 @@ const Product = ({ data, productStyle }) => {
             <a className="product-name">{data.name}</a>
           </Link>
           <div className="product-rate">
-            <Rate defaultValue={data.rate} disabled />
-            <span className="product-rate-quantity">(6)</span>
+            <Rate defaultValue={data.average_rating} disabled />
+            <span className="product-rate-quantity">{data.rating_count}</span>
           </div>
           <div className="product-content__footer">
             <div className="product-content__footer-price">
               <h5 className="product-price">
-                ${data.discount ? data.price - data.discount : data.price}
+                ${data.on_sale ? data.sale_price : data.price}
               </h5>
-              {data.discount && <span>{data.price}</span>}
+              {data.on_sale && <span>{data.price}</span>}
             </div>
             {!productStyle || productStyle === "one" ? (
               <Tooltip title="Add to cart">
