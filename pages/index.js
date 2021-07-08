@@ -32,18 +32,12 @@ const Home = ({ user }) => {
       const result = await fetch("/api/logout", {
         method: "POST",
       });
+
+
       router.push("/login");
     } catch (error) {
       console.log(error);
     }
-    // TOKEN REVOKE
-    // try {
-    //   await fetch(`${process.env.BACKEND_URL}/?rest_route=/simple-jwt-login/v1/auth/revoke&JWT={{YOUR_JWT}}`,{
-
-    //   })
-    // } catch (error) {
-
-    // }
   };
   // logout - khasmir
 
