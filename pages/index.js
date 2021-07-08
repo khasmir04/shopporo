@@ -78,7 +78,7 @@ const Home = ({ user }) => {
   };
 
   // // logout - khasmir
-  // const router = useRouter();
+  const router = useRouter();
 
   const onLogout = async (e) => {
     e.preventDefault();
