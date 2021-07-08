@@ -42,19 +42,25 @@ const login = ({ user }) => {
           <form className="shadow-lg w-96 p-4 flex flex-col bg-white rounded-lg"
             onSubmit={handleSubmit(onSubmit)}
           >
-            <input className="mb-3 py-3 px-4 border border-gray-400 focus:outline-none rounded-md focus:ring-1 ring-cyan-500"
+            <input className="py-3 px-4 border border-gray-400 focus:outline-none rounded-md focus:ring-1 ring-cyan-500"
               name="username"
               type="text"
               placeholder="Username"
               {...register("username", { required: true })}
             />
-            <input className="mb-3 py-3 px-4 border border-gray-400 focus:outline-none rounded-md focus:ring-1 ring-cyan-500"
+            {errors.username && (
+              <span className="text-red-300">Username is required</span>
+            )}
+            <input className="mt-3 py-3 px-4 border border-gray-400 focus:outline-none rounded-md focus:ring-1 ring-cyan-500"
               name="password"
               type="password"
               placeholder="Password"
               {...register("password", { required: true })}
             />
-            <button className="w-full bg-primary text-white p-3 rounded-lg font-semibold text-lg"
+            {errors.password && (
+              <span className="text-red-300">Password is required</span>
+            )}
+            <button className="mt-3 w-full bg-primary text-white p-3 rounded-lg font-semibold text-lg"
               type="submit"
             >Login</button>
             <a className="text-blue-400 text-center my-2">Forgot Pasword?</a>

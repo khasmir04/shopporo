@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { withSession } from "../middlewares/session";
 import LayoutAuth from "../components/layouts/LayoutAuth";
 import Link from "next/link";
+import { ToastContainer, toast } from 'react-toastify';
 
 const register = ({ user }) => {
   const router = useRouter();
@@ -17,6 +18,27 @@ const register = ({ user }) => {
 
   const password = useRef({});
   password.current = watch("password", "");
+
+  const registrationSucceeded = (message) => toast.success(`✔ ${message} Redirecting...`, {
+    position: "top-right",
+    autoClose: 4000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: false,
+    draggable: true,
+    progress: undefined,
+    onClose: () => router.push("/login"),
+  });
+
+  const registrationFailed = (message) => toast.error(`❌ Registration Failed! ${message}`, {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  });
 
   const onSubmit = async (data) => {
     try {
@@ -38,10 +60,14 @@ const register = ({ user }) => {
           },
         }
       );
-
-      alert("successful registration");
+      const res = await result.json();
+      res && res.success == true ?
+        registrationSucceeded(res.message)
+        :
+        registrationFailed(res.data.message);
     } catch (error) {
       console.log(error);
+      registrationFailed("Ask for assistance");
     }
   };
 
@@ -58,7 +84,7 @@ const register = ({ user }) => {
               className="shadow-lg w-96 p-4 flex flex-col bg-white rounded-lg mx-auto"
             >
               {/* NEW DESIGN */}
-              <input className="mb-3 py-3 px-4 border border-gray-400 focus:outline-none rounded-md focus:ring-1 ring-cyan-500"
+              <input className="py-3 px-4 border border-gray-400 focus:outline-none rounded-md focus:ring-1 ring-cyan-500"
                 name="username"
                 type="text"
                 placeholder="Username"
@@ -67,7 +93,7 @@ const register = ({ user }) => {
               {errors.username && (
                 <span className="text-red-300">Username is required</span>
               )}
-              <input className="mb-3 py-3 px-4 border border-gray-400 focus:outline-none rounded-md focus:ring-1 ring-cyan-500"
+              <input className="mt-3 py-3 px-4 border border-gray-400 focus:outline-none rounded-md focus:ring-1 ring-cyan-500"
                 name="email"
                 type="email"
                 placeholder="Email"
@@ -76,7 +102,7 @@ const register = ({ user }) => {
               {errors.email && (
                 <span className="text-red-300">Email is required</span>
               )}
-              <input className="mb-3 py-3 px-4 border border-gray-400 focus:outline-none rounded-md focus:ring-1 ring-cyan-500"
+              <input className="mt-3 py-3 px-4 border border-gray-400 focus:outline-none rounded-md focus:ring-1 ring-cyan-500"
                 name="password"
                 type="password"
                 placeholder="Password"
@@ -86,7 +112,7 @@ const register = ({ user }) => {
                 <span className="text-red-300">Password is required</span>
               )}
 
-              <input className="mb-3 py-3 px-4 border border-gray-400 focus:outline-none rounded-md focus:ring-1 ring-cyan-500"
+              <input className="mt-3 py-3 px-4 border border-gray-400 focus:outline-none rounded-md focus:ring-1 ring-cyan-500"
                 name="password_repeat"
                 type="password"
                 placeholder="Confirm password"
@@ -99,7 +125,7 @@ const register = ({ user }) => {
               {errors.password_repeat && (
                 <span className="text-red-300">The passwords do not match</span>)}
 
-              <button className="w-full bg-primary text-white p-3 rounded-lg font-semibold text-lg"
+              <button className="mt-3 w-full bg-primary text-white p-3 rounded-lg font-semibold text-lg"
                 type="submit"
               >Register</button>
               <div className="text-blue-400 text-center my-2">Already have an account?</div>
@@ -113,6 +139,7 @@ const register = ({ user }) => {
             </p>
           </div>
         </div>
+        <ToastContainer />
       </LayoutAuth>
     </>
   );

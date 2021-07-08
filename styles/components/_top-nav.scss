@@ -32,8 +32,9 @@
   &-links {
     display: flex;
     &__item {
-      &:first-child {
-        margin-right: emCal(16, 30);
+      margin-right: emCal(16, 30);
+      &:last-child {
+        margin-right: 0;
       }
       a {
         @include link(
