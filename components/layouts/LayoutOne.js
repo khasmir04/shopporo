@@ -14,6 +14,7 @@ const LayoutOne = ({
   containerType,
   children,
   clearSpaceTop,
+  userData,
 }) => {
   message.config({
     maxCount: 3,
@@ -24,7 +25,7 @@ const LayoutOne = ({
       <Head>
         <title>{title}</title>
       </Head>
-      <ScrollHeader headerStyle={headerStyle} containerType={containerType} />
+      <ScrollHeader headerStyle={headerStyle} containerType={containerType} userData={userData} />
       <div className={`content ${classNames({ "clear-top": clearSpaceTop })}`}>
         {children}
       </div>

@@ -1,5 +1,7 @@
 import { Select } from "antd";
 import Link from "next/link";
+import { withSession } from "../../../middlewares/session";
+import { useRouter } from "next/router";
 // import { useSelector, useDispatch } from "react-redux";
 // import React from "react";
 
@@ -9,8 +11,9 @@ import Link from "next/link";
 // } from "../../../redux/actions/globalActions";
 import Container from "../../other/Container";
 
-function TopNav({ containerType }) {
+function TopNav({ containerType, userData }) {
   const { Option } = Select;
+
   // const dispatch = useDispatch();
   // const globalState = useSelector((state) => state.globalReducer);
   // const onSelectLanguage = (value) => {
@@ -19,6 +22,20 @@ function TopNav({ containerType }) {
   // const onSelectCurrency = (value) => {
   //   dispatch(setGlobalCurrency(value));
   // };
+  const router = useRouter();
+  const onLogout = async (e) => {
+    e.preventDefault();
+
+    try {
+      const result = await fetch("/api/logout", {
+        method: "POST",
+      });
+      router.push("/login");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="top-nav">
       <Container type={containerType}>
@@ -61,6 +78,24 @@ function TopNav({ containerType }) {
                 </a>
               </Link>
             </div>
+            {userData ? (
+              <div className="top-nav-links__item md:flex items-center justify-center">
+                <a className="md:mr-7 capitalize">Hi {userData.data.user.display_name}!{" "}</a>
+                <div>
+                  <a href="/api/logout" onClick={onLogout}>
+                    Logout
+                  </a>
+                </div>
+              </div>
+            ) : (
+              <div className="top-nav-links__item">
+                <Link href="/login">
+                  <a>
+                    Hi Guest,{" "}Login
+                  </a>
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </Container>

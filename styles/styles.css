@@ -1242,8 +1242,12 @@ template {
   display: flex;
 }
 
-.top-nav-links__item:first-child {
+.top-nav-links__item {
   margin-right: 1.875em;
+}
+
+.top-nav-links__item:last-child {
+  margin-right: 0;
 }
 
 .top-nav-links__item a {

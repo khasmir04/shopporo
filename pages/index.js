@@ -56,25 +56,7 @@ const Home = ({ user }) => {
 
   // console.log(result);
   return (
-    <LayoutOne title="Home">
-      <h1>Home</h1>
-      <div>
-        {user ? (
-          <p>
-            Hello {user.data.user.display_name}!{" "}
-            <a href="/api/logout" onClick={onLogout}>
-              Logout
-            </a>
-          </p>
-        ) : (
-          <p>
-            Hello guest, do you want to{" "}
-            <Link href="/login">
-              <a>login ?</a>
-            </Link>
-          </p>
-        )}
-      </div>
+    <LayoutOne title="Shopporo" userData={user}>
       <Banners />
       <ShopLayout
         fiveColumn
