@@ -3,8 +3,8 @@ const withLess = require("next-with-less");
 module.exports = withLess({
   // optional
   env: {
-    // PUBLIC_URL: 'https://www.shopporo.ml',
-    PUBLIC_URL: "http://localhost:3000",
+    PUBLIC_URL: "https://www.shopporo.ml",
+    // PUBLIC_URL: "http://localhost:3000",
     BACKEND_URL: "https://api.shopporo.ml",
 
     consumerKey: "ck_9f8fc54f84807c9f927975225178ffa345a79c1d",
