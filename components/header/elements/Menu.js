@@ -38,12 +38,9 @@ const Menu = ({ containerType, user }) => {
               <div></div>
             </a>
             <div className="menu-logo">
-              <Link href={process.env.PUBLIC_URL + "/"}>
+              <Link href={"/"}>
                 <a>
-                  <img
-                    src={process.env.PUBLIC_URL + "/assets/images/logo.png"}
-                    alt="Logo"
-                  />
+                  <img src={"/assets/images/logo.png"} alt="Logo" />
                 </a>
               </Link>
             </div>
@@ -61,26 +58,14 @@ const Menu = ({ containerType, user }) => {
                 className="menu-function-item"
                 onClick={() => setWishlistSidebarOpen(true)}
               >
-                <img
-                  src={
-                    process.env.PUBLIC_URL +
-                    "/assets/images/header/menu-wishlist.png"
-                  }
-                  alt=""
-                />
+                <img src={"/assets/images/header/menu-wishlist.png"} alt="" />
                 <span>{/* {wishlistState.length} */}</span>
               </div>
               <div
                 className="menu-function-item"
                 onClick={() => setCartSidebarOpen(true)}
               >
-                <img
-                  src={
-                    process.env.PUBLIC_URL +
-                    "/assets/images/header/menu-bag.png"
-                  }
-                  alt=""
-                />
+                <img src={"/assets/images/header/menu-bag.png"} alt="" />
                 <span>{/* {getTotalProductInCart(cartState)} */}</span>
               </div>
             </div>

@@ -41,6 +41,6 @@ const CartSidebar = () => {
       </div>
     </div>
   );
-}
+};
 
 export default CartSidebar;
