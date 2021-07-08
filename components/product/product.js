@@ -8,8 +8,8 @@ const Product = ({ data, productStyle }) => {
   const [visible, setVisible] = useState(false);
 
   const renderStyleClass = () => {
-    const avaialeStyles = ["one", "two", "three"];
-    if (avaialeStyles.includes(productStyle)) {
+    const availableStyles = ["one", "two", "three"];
+    if (availableStyles.includes(productStyle)) {
       if (!productStyle || productStyle === "one") {
         return "-style-one";
       } else {
