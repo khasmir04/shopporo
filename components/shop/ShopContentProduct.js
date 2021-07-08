@@ -22,6 +22,27 @@ const ShopContentProduct = ({
   const [page, setPage] = useState(1);
   const [offset, setOffset] = useState(0);
 
+  // const getData = async (offSet) => {
+  //   try {
+  //     const res = await fetch(
+  //       `${process.env.BACKEND_URL}/wp-json/public-woo/v3/products/?per_page=16&offset=${offSet}`,
+  //       {
+  //         method: "GET",
+  //       }
+  //     );
+
+  //     const result = await res.json();
+  //     console.log(result);
+  //     setCurrentData(result);
+  //   } catch (error) {
+  //     console.log("Fetching products failed:", error);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   getData();
+  // }, [data]);
+
   // useEffect(() => {
   //   let filteredProduct = getProductsByFilter(
   //     [...data],
@@ -85,7 +106,7 @@ const ShopContentProduct = ({
                     </Col>
                   ))}
               </Row>
-              {currentData.length >= productPerPage && (
+              {/* {currentData.length >= productPerPage && (
                 <Pagination
                   showSizeChanger={false}
                   className={"mt-10 flex justify-center"}
@@ -97,7 +118,7 @@ const ShopContentProduct = ({
                   itemRender={itemRender}
                   onChange={(page, pageSize) => onChangeOffset(page, pageSize)}
                 />
-              )}
+              )} */}
             </>
           ) : (
             <Empty description={"No products in this category"} />

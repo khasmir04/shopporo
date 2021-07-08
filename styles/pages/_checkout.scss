@@ -63,7 +63,7 @@
               td {
                 @include typo($fsz: emCal(16, 24), $fw: 700);
                 &:last-child {
-                  color: setColor(red);
+                  color: setColor(blue);
                 }
               }
             }
@@ -118,7 +118,7 @@
         &-label {
           label {
             @include typo($fsz: emCal(16, 15));
-            &.ant-form-item-required {
+            &.ant-form-item-requiblue {
               &:before {
                 display: none;
               }
@@ -240,7 +240,7 @@
         td {
           @include typo($fsz: emCal(16, 24), $fw: 700);
           &:last-child {
-            color: setColor(red);
+            color: setColor(blue);
           }
         }
       }

@@ -68,9 +68,7 @@ const Menu = ({ containerType, user }) => {
                   }
                   alt=""
                 />
-                <span>
-                  {/* {wishlistState.length} */}
-                </span>
+                <span>{/* {wishlistState.length} */}</span>
               </div>
               <div
                 className="menu-function-item"
@@ -83,11 +81,8 @@ const Menu = ({ containerType, user }) => {
                   }
                   alt=""
                 />
-                <span>
-                  {/* {getTotalProductInCart(cartState)} */}
-                </span>
+                <span>{/* {getTotalProductInCart(cartState)} */}</span>
               </div>
-
             </div>
           </div>
         </Container>
@@ -151,6 +146,6 @@ const Menu = ({ containerType, user }) => {
       </Drawer>
     </>
   );
-}
+};
 
 export default Menu;

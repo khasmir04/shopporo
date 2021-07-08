@@ -103,7 +103,7 @@ const MenuSidebar = () => {
           // defaultValue={globalState.language}
           style={{ width: 120 }}
           bordered={false}
-        // onChange={onSelectLanguage}
+          // onChange={onSelectLanguage}
         >
           <Option value="en">English</Option>
           <Option value="jp">Japanese</Option>
@@ -113,7 +113,7 @@ const MenuSidebar = () => {
           // defaultValue={globalState.currency.currency}
           style={{ width: 150 }}
           bordered={false}
-        // onChange={onSelectCurrency}
+          // onChange={onSelectCurrency}
         >
           <Option value="USD">USD - Dollar</Option>
           <Option value="JPY">JPY - Yen</Option>
@@ -122,6 +122,6 @@ const MenuSidebar = () => {
       </div>
     </div>
   );
-}
+};
 
 export default MenuSidebar;

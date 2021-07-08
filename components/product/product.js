@@ -34,7 +34,10 @@ const Product = ({ data, productStyle }) => {
     <>
       <div className={`product ${renderStyleClass()}`}>
         <div className="product-image">
-          <Link href={`/product/[slug]`} as={`/product/${data.slug}`}>
+          <Link
+            href={`${process.env.PUBLIC_URL}/product/[slug]`}
+            as={`${process.env.PUBLIC_URL}/product/${data.slug}`}
+          >
             {/* <a className={classNames({ loading: imageLoading })}> */}
             <a>
               {data.thumbImage &&
@@ -65,11 +68,7 @@ const Product = ({ data, productStyle }) => {
                 // title={
                 //   productInWishlist ? "Remove from wishlist" : "Add to wishlist"
                 // }
-                title={
-                  Math.random() * 10 > 4
-                    ? "Remove from wishlist"
-                    : "Add to wishlist"
-                }
+                title={"Add to wishlist"}
               >
                 <Button
                   className={`product-atw ${classNames({
@@ -101,16 +100,12 @@ const Product = ({ data, productStyle }) => {
                 //   productInWishlist ? "Remove from wishlist" : "Add to wishlist"
                 // }
 
-                title={
-                  Math.random() * 10 > 4
-                    ? "Remove from wishlist"
-                    : "Add to wishlist"
-                }
+                title={"Add to wishlist"}
               >
                 <Button
                   className={`product-atw ${classNames({
                     // active: productInWishlist,
-                    active: Math.ceil(Math.random() * 10 > 4),
+                    active: false,
                   })}`}
                   type="text"
                   shape="circle"
@@ -127,14 +122,15 @@ const Product = ({ data, productStyle }) => {
           ) : null}
         </div>
         <div className="product-content">
-          <Link href={`/product/[slug]`} as={`/product/${data.slug}`}>
+          <Link
+            href={`${process.env.PUBLIC_URL}/product/[slug]`}
+            as={`${process.env.PUBLIC_URL}/product/${data.slug}`}
+          >
             <a className="product-name">{data.name}</a>
           </Link>
           <div className="product-rate">
             <Rate defaultValue={data.rate} disabled />
-            <span className="product-rate-quantity">
-              ({Math.ceil(Math.random() * 15)})
-            </span>
+            <span className="product-rate-quantity">(6)</span>
           </div>
           <div className="product-content__footer">
             <div className="product-content__footer-price">

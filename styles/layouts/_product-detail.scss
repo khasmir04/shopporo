@@ -40,7 +40,7 @@
       padding-left: emCal(16, 25);
       border-left: 1px solid setShadeColor(border);
       h5 {
-        @include typo($fsz: emCal(16, 13), $color: setColor(red));
+        @include typo($fsz: emCal(16, 13), $color: setColor(blue));
         margin-bottom: emCal(13, 10);
       }
       h3 {
@@ -111,7 +111,7 @@
       }
       .slick-current {
         img {
-          border-color: setColor(red);
+          border-color: setColor(blue);
         }
       }
     }
@@ -228,7 +228,7 @@
           h5 {
             @include typo($fsz: emCal(16, 15), $fw: 600);
             span {
-              color: setColor(red);
+              color: setColor(blue);
             }
           }
         }
@@ -283,10 +283,10 @@
               border: emCal(16, 4) solid #fff;
               box-shadow: 0px 0px 0px 1px setShadeColor(medium);
               &:hover {
-                box-shadow: 0px 0px 0px 1px setColor(red);
+                box-shadow: 0px 0px 0px 1px setColor(blue);
               }
               &-checked {
-                box-shadow: 0px 0px 0px 1px setColor(red);
+                box-shadow: 0px 0px 0px 1px setColor(blue);
               }
               &::before {
                 display: none;
@@ -331,7 +331,7 @@
             &::after {
               left: 10px;
               right: 10px;
-              color: setColor(red);
+              color: setColor(blue);
             }
           }
           &::after {

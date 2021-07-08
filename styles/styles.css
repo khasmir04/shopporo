@@ -1223,7 +1223,7 @@ template {
 }
 
 .subpages-sidebar-main .ant-drawer-content-wrapper .ant-drawer-content .ant-drawer-body h2 span {
-  color: #0187cc;
+  color: red;
   font-size: 4.5em;
   font-weight: 500;
   line-height: 1;
@@ -1502,7 +1502,7 @@ template {
   height: 2.30769em;
   letter-spacing: 0.17692em;
   font-size: 0.8125em;
-  background-color: #0187cc;
+  background-color: red;
   color: #fff;
   border: 0;
   text-transform: uppercase;
@@ -2961,11 +2961,11 @@ template {
   line-height: 1;
 }
 
-.checkout-form .ant-form-item-label label.ant-form-item-required:before {
+.checkout-form .ant-form-item-label label.ant-form-item-requiblue:before {
   display: none;
 }
 
-.checkout-form .ant-form-item-label label.ant-form-item-required:after {
+.checkout-form .ant-form-item-label label.ant-form-item-requiblue:after {
   content: "*";
   display: inline-block;
 }

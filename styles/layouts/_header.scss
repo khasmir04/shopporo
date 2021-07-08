@@ -1,14 +1,14 @@
 .header-one {
   &.-style-two {
     .menu {
-      background-color: setColor(blue);
+      background-color: setColor(black);
       &-search {
         &__form {
           &-input {
             .ant-btn {
-              background-color: setColor(red);
+              background-color: setColor(blue);
               &:hover {
-                background-color: lighten(setColor(red), 20%);
+                background-color: lighten(setColor(blue), 20%);
               }
             }
           }
@@ -17,13 +17,13 @@
       &-functions {
         .menu-function-item {
           span {
-            background-color: setColor(red);
+            background-color: setColor(blue);
           }
         }
       }
     }
     .top-nav {
-      background-color: setColor(blue);
+      background-color: setColor(black);
     }
   }
 }

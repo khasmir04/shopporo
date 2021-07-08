@@ -32,6 +32,6 @@ const LayoutOne = ({
       <BackTop />
     </>
   );
-}
+};
 
 export default LayoutOne;

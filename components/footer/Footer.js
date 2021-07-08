@@ -86,6 +86,6 @@ const Footer = ({ containerType }) => {
       </div>
     </div>
   );
-}
+};
 
 export default Footer;

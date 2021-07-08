@@ -8,6 +8,6 @@ const Container = ({ type, children }) => {
     }
   };
   return <div className={renderContainerType(type)}>{children}</div>;
-}
+};
 
 export default Container;

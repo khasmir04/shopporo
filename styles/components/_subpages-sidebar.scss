@@ -14,14 +14,18 @@
           right: 100%;
           height: emCal(16, 50);
           width: emCal(16, 50);
-          background-color: red;
+          background-color: blue;
           transform: translateY(-50%);
         }
         h2 {
           @include typo($fsz: emCal(16, 24), $fw: 800);
           margin-bottom: emCal(24, 25);
           span {
-            @include typo($fsz: emCal(16, 72), $color: setColor(red), $fw: 500);
+            @include typo(
+              $fsz: emCal(16, 72),
+              $color: setColor(blue),
+              $fw: 500
+            );
             position: relative;
             &::after {
               content: "+";
@@ -86,7 +90,7 @@
         right: 100%;
         height: emCal(16, 50);
         width: emCal(16, 50);
-        background-color: red;
+        background-color: blue;
         transform: translateY(-50%);
       }
     }

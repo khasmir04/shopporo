@@ -37,7 +37,6 @@ function ShopSidebar({ categories }) {
             // REPLACE WITH EMPTY FOR NOW
             className={classNames({
               active: "" === "",
-
             })}
           >
             <Link href="#">
@@ -61,7 +60,6 @@ function ShopSidebar({ categories }) {
               // active: "clothing" === item.name,
               // THIS IS TEMPORARY, REPLACE WITH shopState.subCategory ABOVE
               key={index}
-
               className={classNames({
                 // active: shopState.subCategory === item.name,
                 active: "clothing" === item.name,

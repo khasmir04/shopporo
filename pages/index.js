@@ -23,8 +23,62 @@ const Home = ({ user }) => {
   //   router.query.q
   // );
 
-  // logout - khasmir
-  const router = useRouter();
+  const [data, setData] = useState([]);
+  const [products, setProducts] = useState([]);
+  let sampleRes;
+
+  const fetchData = async () => {
+    try {
+      const res = await fetch(
+        `${process.env.BACKEND_URL}/wp-json/public-woo/v3/products`,
+        {
+          method: "GET",
+        }
+      );
+
+      // const productReportTotal = await fetch(
+      //   `${process.env.BACKEND_URL}/wp-json/public-woo/v2/reports/products/totals`,
+      //   {
+      //     method: "GET",
+      //     headers: {
+      //       Authorization: "Bearer ",
+      //     },
+      //   }
+      // );
+
+      // console.log("Res:", res.headers.get("x-wp-total"));
+      const result = await res.json();
+      // sampleRes = res.headers["x-wp-total"];
+      console.log(result);
+      // setData(() => [...result]);
+    } catch (error) {
+      console.log("Fetching products failed:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, [data]);
+
+  const getData = async (offSet) => {
+    try {
+      const res = await fetch(
+        `${process.env.BACKEND_URL}/wp-json/public-woo/v3/products/?per_page=16&offset=${offSet}`,
+        {
+          method: "GET",
+        }
+      );
+
+      const result = await res.json();
+
+      // setProducts(result);
+    } catch (error) {
+      console.log("Fetching products failed:", error);
+    }
+  };
+
+  // // logout - khasmir
+  // const router = useRouter();
 
   const onLogout = async (e) => {
     e.preventDefault();
@@ -34,29 +88,30 @@ const Home = ({ user }) => {
         method: "POST",
       });
 
-
       router.push("/login");
     } catch (error) {
       console.log(error);
     }
   };
+
   // logout - khasmir
 
-  // const getDetails = async () => {
-  //   try {
-  //     const result = await fetch(
-  //       `${process.env.BACKEND_URL}/?rest_route=/simple-jwt-login/v1/auth/validate&JWT=${user.data.jwt}`,
-  //       {
-  //         method: "GET",
-  //       },
-  //     );
-  //   } catch (error) {
-  //     console.log("Getting details failed.")
-  //   }
-  // }
+  const getDetails = async () => {
+    try {
+      const result = await fetch(
+        `${process.env.BACKEND_URL}/?rest_route=/simple-jwt-login/v1/auth/validate&JWT=${user.data.jwt}`,
+        {
+          method: "GET",
+        }
+      );
+    } catch (error) {
+      console.log("Getting details failed.");
+    }
+  };
 
   // console.log(result);
 
+  /*
   const data = [
     {
       id: "1",
@@ -131,7 +186,7 @@ const Home = ({ user }) => {
       id: "3",
       category: "clothing",
       subCategory: "shirt",
-      name: "Ivory Check Longline Tunic Shirt",
+      name: "ivory Check Longline Tunic Shirt",
       rate: 5,
       price: 69,
       quantity: 12,
@@ -1961,10 +2016,11 @@ const Home = ({ user }) => {
       slug: "white-sandal-beauty-86",
     },
   ];
+  */
 
   return (
     <LayoutOne title="Home">
-      <h1>Home</h1>
+      <h1>Home - {sampleRes}</h1>
       <div>
         {user ? (
           <p>

@@ -21,13 +21,13 @@
 
 @mixin link(
   $color: setShadeColor(dark),
-  $hvr-color: setShadeColor(red),
+  $hvr-color: setShadeColor(blue),
   $fsz: 14px,
   $fw: normal,
   $lh: 1,
   $up: false,
   $cpt: false,
-  $dashcolor: setColor(red)
+  $dashcolor: setColor(blue)
 ) {
   color: setColor($color);
   font-size: $fsz;
