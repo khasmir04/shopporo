@@ -18,7 +18,8 @@ const ShopContentProduct = ({
 }) => {
   // const shopState = useSelector((state) => state.shopReducer);
   // const globalState = useSelector((state) => state.globalReducer);
-  const [currentData, setCurrentData] = useState(data);
+
+  const currentData = data;
   const [page, setPage] = useState(1);
   const [offset, setOffset] = useState(0);
 
@@ -84,7 +85,7 @@ const ShopContentProduct = ({
   return (
     <div className="shop-content__product">
       {!currentData ? (
-        <Empty description={"No products in this category"} />
+        <Empty description={"No products"} />
       ) : (
         <>
           {currentData.length > 0 ? (
@@ -106,7 +107,7 @@ const ShopContentProduct = ({
                     </Col>
                   ))}
               </Row>
-              {/* {currentData.length >= productPerPage && (
+              {currentData.length >= productPerPage && (
                 <Pagination
                   showSizeChanger={false}
                   className={"mt-10 flex justify-center"}
@@ -118,7 +119,7 @@ const ShopContentProduct = ({
                   itemRender={itemRender}
                   onChange={(page, pageSize) => onChangeOffset(page, pageSize)}
                 />
-              )} */}
+              )}
             </>
           ) : (
             <Empty description={"No products in this category"} />
