@@ -24,26 +24,31 @@ export default nc()
       const user = await result.json();
 
       // Check token after loggin in
-      if (!user.data.jwt) {
-        return "User not found.";
+      if (user.success) {
+        // Get User Details
+        const userInfo = await fetch(
+          `${process.env.BACKEND_URL}/?rest_route=/simple-jwt-login/v1/auth/validate`,
+          {
+            method: "GET",
+            headers: {
+              "Authorization": `${user.data.jwt}`
+            }
+          },
+        );
+        const userDetails = await userInfo.json();
+
+        // Saving and passing data
+        req.session.set("user", userDetails);
+        await req.session.save();
+        res.json(userDetails);
+      }
+      else {
+        // res.json(user);
+        req.session.set("user", user);
+        await req.session.save();
+        res.json(user);
       }
 
-      // Get User Details
-      const userInfo = await fetch(
-        `${process.env.BACKEND_URL}/?rest_route=/simple-jwt-login/v1/auth/validate`,
-        {
-          method: "GET",
-          headers: {
-            "Authorization": `${user.data.jwt}`
-          }
-        },
-      );
-      const userDetails = await userInfo.json();
-
-      // Saving and passing data
-      req.session.set("user", userDetails);
-      await req.session.save();
-      res.json(userDetails);
 
     } catch (error) {
       const { response: fetchResponse } = error;

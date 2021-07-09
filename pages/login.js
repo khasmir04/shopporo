@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { withSession } from "../middlewares/session";
 import Link from "next/link";
 import LayoutAuth from "../components/layouts/LayoutAuth";
+import { ToastContainer, toast } from 'react-toastify';
 
 const login = ({ user }) => {
   const router = useRouter();
@@ -12,6 +13,27 @@ const login = ({ user }) => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const loginSucceeded = () => toast.success(`✔ Login Sucess! Redirecting...`, {
+    position: "top-right",
+    autoClose: 4000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: false,
+    draggable: true,
+    progress: undefined,
+    onClose: () => router.push("/"),
+  });
+
+  const loginFailed = (message) => toast.error(`❌ Login Failed! ${message}`, {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  });
 
   const onSubmit = async (data) => {
     try {
@@ -25,7 +47,9 @@ const login = ({ user }) => {
           "Content-Type": "application/json",
         },
       });
-      result == "User not found." ? null : router.push("/");
+      const res = await result.json();
+      // console.log(res);
+      (res.success) ? loginSucceeded() : loginFailed(res.data.message);
     } catch (error) {
       console.log(error);
     }
@@ -88,6 +112,7 @@ const login = ({ user }) => {
         pauseOnHover
         /> */}
       </div>
+      <ToastContainer />
     </LayoutAuth>
   );
 };
