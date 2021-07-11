@@ -1,22 +1,27 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { Modal, message } from "antd";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import { formatCurrency } from "../../common/utils";
 import QuantitySelector from "../controls/QuantitySelector";
+// import {
+//   removeFromCart,
+//   decreaseQuantityCart,
+//   increaseQuantityCart,
+// } from "../../redux/actions/cartActions";
 import {
   removeFromCart,
-  decreaseQuantityCart,
-  increaseQuantityCart,
-} from "../../redux/actions/cartActions";
+  decreaseQuantity,
+  increaseQuantity,
+} from "../../redux/cartSlice";
 
-function CartSidebarItem({ data }) {
+const CartSidebarItem = ({ data }) => {
   const dispatch = useDispatch();
   const [visible, setVisible] = useState(false);
-  const [quantity, setQuantity] = useState(data.cartQuantity);
-  const globalState = useSelector((state) => state.globalReducer);
-  const { currency, locales } = globalState.currency;
+  // const [quantity, setQuantity] = useState(data.cartQuantity);
+  // const globalState = useSelector((state) => state.globalReducer);
+  // const { currency, locales } = globalState.currency;
   const onRemoveProductFromCart = (e) => {
     e.preventDefault();
     showModal();
@@ -25,8 +30,8 @@ function CartSidebarItem({ data }) {
     setVisible(true);
   };
 
-  const handleOk = (e) => {
-    dispatch(removeFromCart(data.cartId));
+  const handleOk = (id) => {
+    dispatch(removeFromCart(id));
     setVisible(false);
     return message.error("Product removed from cart");
   };
@@ -38,17 +43,21 @@ function CartSidebarItem({ data }) {
     <>
       <div className="cart-sidebar-item">
         <div className="cart-sidebar-item__image">
-          <img src={data.thumbImage[0]} alt="Product image" />
+          <img
+            src={
+              data.images.length > 0 && data !== undefined
+                ? data.images[0].src
+                : "/assets/images/products/clothes/1.png"
+            }
+            alt="Product image"
+          />
         </div>
         <div className="cart-sidebar-item__content">
-          <Link
-            href={process.env.PUBLIC_URL + `/product/[slug]`}
-            as={process.env.PUBLIC_URL + `/product/${data.slug}`}
-          >
+          <Link href={`/product/[slug]`} as={`/product/${data.slug}`}>
             <a>{data.name}</a>
           </Link>
           <h5>
-            {data.discount
+            {/* {data.discount
               ? formatCurrency(
                   (data.price - data.discount) * data.cartQuantity,
                   locales,
@@ -58,15 +67,17 @@ function CartSidebarItem({ data }) {
                   data.price * data.cartQuantity,
                   locales,
                   currency
-                )}
+                )} */}
+            ${data.on_sale ? data.sale_price : data.price}
           </h5>
           <QuantitySelector
             size="small"
-            defaultValue={data.cartQuantity}
+            defaultValue={data.qty}
+            data={data}
             min={1}
-            max={data.quantity}
-            onDecrease={() => dispatch(decreaseQuantityCart(data.cartId))}
-            onIncrease={() => dispatch(increaseQuantityCart(data.cartId))}
+            max={data.stock_quantity ? data.stock_quantity : 5}
+            onDecrease={() => dispatch(decreaseQuantity(data.id))}
+            onIncrease={() => dispatch(increaseQuantity(data.id))}
           />
         </div>
         <div className="cart-sidebar-item__close">
@@ -78,13 +89,13 @@ function CartSidebarItem({ data }) {
       <Modal
         title="Cofirm this action"
         visible={visible}
-        onOk={handleOk}
+        onOk={() => handleOk(data.id)}
         onCancel={handleCancel}
       >
         <p>Are your sure to remove product from cart ?</p>
       </Modal>
     </>
   );
-}
+};
 
 export default React.memo(CartSidebarItem);

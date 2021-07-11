@@ -1,5 +1,5 @@
-import { Button } from 'antd'
-import classNames from 'classnames'
+import { Button } from "antd";
+import classNames from "classnames";
 
 const QuantitySelector = ({
   min,
@@ -11,18 +11,29 @@ const QuantitySelector = ({
   className,
   onDecrease,
   onIncrease,
+  data,
 }) => {
   return (
     <div className={`quantity-selector`}>
-      <Button className="quantity-selector-controller" type="link">
+      <Button
+        disabled={data.qty <= min}
+        className="quantity-selector-controller"
+        type="link"
+        onClick={onDecrease}
+      >
         -
       </Button>
-      <div className="quantity-selector-number">1</div>
-      <Button className="quantity-selector-controller" type="link">
+      <div className="quantity-selector-number">{data.qty}</div>
+      <Button
+        disabled={data.qty >= max}
+        className="quantity-selector-controller"
+        type="link"
+        onClick={onIncrease}
+      >
         +
       </Button>
     </div>
-  )
-}
+  );
+};
 
-export default QuantitySelector
+export default QuantitySelector;

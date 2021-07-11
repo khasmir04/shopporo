@@ -2,7 +2,7 @@ import { Row, Col, Divider } from "antd";
 import Link from "next/link";
 import Container from "../other/Container";
 
-const Banner = ({containerType}) => {
+const Banner = ({ containerType }) => {
   return (
     <div className="banners">
       <Container type={containerType}>
@@ -27,6 +27,6 @@ const Banner = ({containerType}) => {
       </Container>
     </div>
   );
-}
+};
 
 export default Banner;

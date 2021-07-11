@@ -2,10 +2,13 @@ import Link from "next/link";
 import { Rate, Button, Tooltip, Skeleton, message, Modal, Spin } from "antd";
 import classNames from "classnames";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import ShopQuickView from "../shop/ShopQuickView";
+import { addToCart } from "../../redux/cartSlice";
 
 const Product = ({ data, productStyle }) => {
   const [visible, setVisible] = useState(false);
+  const dispatch = useDispatch();
 
   const renderStyleClass = () => {
     const availableStyles = ["one", "two", "three"];
@@ -97,7 +100,7 @@ const Product = ({ data, productStyle }) => {
                   // disabled={avaiableQuantity === 0}
                   disabled={false}
                   type="text"
-                  // onClick={() => onAddToCart(data)}
+                  onClick={() => dispatch(addToCart(data))}
                 >
                   <i className="icon_bag_alt" />
                 </Button>
@@ -156,7 +159,7 @@ const Product = ({ data, productStyle }) => {
                   className="product-atc"
                   type="text"
                   shape="circle"
-                  // onClick={() => onAddToCart(data)}
+                  onClick={() => dispatch(addToCart(data))}
                 >
                   <i className="icon_bag_alt" />
                 </Button>
@@ -197,7 +200,7 @@ const Product = ({ data, productStyle }) => {
                     // disabled={avaiableQuantity === 0}
                     disabled={false}
                     shape="circle"
-                    // onClick={() => onAddToCart(data)}
+                    onClick={() => dispatch(addToCart(data))}
                   >
                     <i className="icon_bag_alt" />
                   </Button>
