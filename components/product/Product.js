@@ -6,8 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 import ShopQuickView from "../shop/ShopQuickView";
 import { addToCart } from "../../redux/cartSlice";
 import { addToWishList, removeFromWishList } from "../../redux/wishlistSlice";
+import { withSession } from "../../middlewares/session";
 
-const Product = ({ data, productStyle }) => {
+const Product = ({ data, productStyle, user }) => {
   const [visible, setVisible] = useState(false);
 
   const { wishlistItems } = useSelector((state) => state.wishlist);
@@ -39,6 +40,29 @@ const Product = ({ data, productStyle }) => {
   const productInWishlist = wishlistItems.find((item) => item.id === data.id)
     ? true
     : false;
+
+  const onAddToCart = async (id) => {
+    try {
+      const userInfo = await fetch(
+        `${process.env.BACKEND_URL}/wp-json/cocart/v2/cart/add-item`,
+        {
+          method: "POST",
+          body: JSON.stringify({
+            id: id,
+          }),
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      const response = await userInfo.json();
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -112,7 +136,8 @@ const Product = ({ data, productStyle }) => {
                   disabled={data.stock_quantity === 0 || !data.stock_quantity}
                   // disabled={false}
                   type="text"
-                  onClick={() => dispatch(addToCart(data))}
+                  // onClick={() => dispatch(addToCart(data))}
+                  onClick={() => onAddToCart(data.id.toString())}
                 >
                   <i className="icon_bag_alt" />
                 </Button>
@@ -173,7 +198,8 @@ const Product = ({ data, productStyle }) => {
                   className="product-atc"
                   type="text"
                   shape="circle"
-                  onClick={() => dispatch(addToCart(data))}
+                  // onClick={() => dispatch(addToCart(data))}
+                  onClick={() => onAddToCart(data.id.toString())}
                 >
                   <i className="icon_bag_alt" />
                 </Button>
@@ -216,7 +242,8 @@ const Product = ({ data, productStyle }) => {
                     disabled={data.stock_quantity === 0 || !data.stock_quantity}
                     // disabled={false}
                     shape="circle"
-                    onClick={() => dispatch(addToCart(data))}
+                    // onClick={() => dispatch(addToCart(data))}
+                    onClick={() => onAddToCart(data.id.toString())}
                   >
                     <i className="icon_bag_alt" />
                   </Button>
@@ -238,5 +265,15 @@ const Product = ({ data, productStyle }) => {
     </>
   );
 };
+
+// export const getServerSideProps = withSession((context) => {
+//   const { req } = context;
+
+//   return {
+//     props: {
+//       user: req.session.get("user") || null,
+//     },
+//   };
+// });
 
 export default Product;

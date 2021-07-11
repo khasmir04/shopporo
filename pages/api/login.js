@@ -21,7 +21,29 @@ export default nc()
           },
         }
       );
+
+      const wpResult = await fetch(
+        `${process.env.BACKEND_URL}/wp-json/jwt-auth/v1/token`,
+        {
+          method: "POST",
+          body: JSON.stringify({
+            username: username,
+            password: password,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      // console.log(result);
+
+      const wpUser = await wpResult.json();
       const user = await result.json();
+
+      // const user = {
+      //   ...wpUser,
+      //   ...sjlUser,
+      // };
 
       // Check token after loggin in
       if (user.success) {
@@ -31,25 +53,27 @@ export default nc()
           {
             method: "GET",
             headers: {
-              "Authorization": `${user.data.jwt}`
-            }
-          },
+              Authorization: `${user.data.jwt}`,
+            },
+          }
         );
         const userDetails = await userInfo.json();
 
+        const mergedUser = {
+          ...wpUser,
+          ...userDetails,
+        };
+
         // Saving and passing data
-        req.session.set("user", userDetails);
+        req.session.set("user", mergedUser);
         await req.session.save();
-        res.json(userDetails);
-      }
-      else {
+        res.json(mergedUser);
+      } else {
         // res.json(user);
         req.session.set("user", user);
         await req.session.save();
         res.json(user);
       }
-
-
     } catch (error) {
       const { response: fetchResponse } = error;
       if (fetchResponse) {

@@ -8,6 +8,7 @@ function ShopContent({
   data,
   productPerPage,
   productStyle,
+  user,
 }) {
   return (
     <div className="shop-content">
@@ -18,6 +19,7 @@ function ShopContent({
         productResponsive={productResponsive}
         data={data}
         productPerPage={productPerPage}
+        user={user}
       />
     </div>
   );

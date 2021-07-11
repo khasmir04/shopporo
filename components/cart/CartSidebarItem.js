@@ -16,7 +16,7 @@ import {
   increaseQuantity,
 } from "../../redux/cartSlice";
 
-const CartSidebarItem = ({ data }) => {
+const CartSidebarItem = ({ data, userData }) => {
   const dispatch = useDispatch();
   const [visible, setVisible] = useState(false);
   // const [quantity, setQuantity] = useState(data.cartQuantity);
@@ -30,8 +30,17 @@ const CartSidebarItem = ({ data }) => {
     setVisible(true);
   };
 
-  const handleOk = (id) => {
-    dispatch(removeFromCart(id));
+  const handleOk = async (id) => {
+    const result = await fetch(
+      `${process.env.BACKEND_URL}/wp-json/cocart/v2/cart/item/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${userData.token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
     setVisible(false);
     return message.error("Product removed from cart");
   };
@@ -45,16 +54,16 @@ const CartSidebarItem = ({ data }) => {
         <div className="cart-sidebar-item__image">
           <img
             src={
-              data.images.length > 0 && data !== undefined
-                ? data.images[0].src
+              data[1].featured_image && data !== undefined
+                ? data[1].featured_image
                 : "/assets/images/products/clothes/1.png"
             }
             alt="Product image"
           />
         </div>
         <div className="cart-sidebar-item__content">
-          <Link href={`/product/[slug]`} as={`/product/${data.slug}`}>
-            <a>{data.name}</a>
+          <Link href={`/product/[slug]`} as={`/product/${data[1].slug}`}>
+            <a>{data[1].name}</a>
           </Link>
           <h5>
             {/* {data.discount
@@ -68,16 +77,16 @@ const CartSidebarItem = ({ data }) => {
                   locales,
                   currency
                 )} */}
-            ${data.on_sale ? data.sale_price : data.price}
+            ${data[1].price}
           </h5>
           <QuantitySelector
             size="small"
-            defaultValue={data.qty}
-            data={data}
+            defaultValue={data[1].quantity.value}
+            data={data[1]}
             min={1}
-            max={data.stock_quantity}
-            onDecrease={() => dispatch(decreaseQuantity(data.id))}
-            onIncrease={() => dispatch(increaseQuantity(data.id))}
+            max={data[1].quantity.max_purchase}
+            // onDecrease={() => dispatch(decreaseQuantity(data.id))}
+            // onIncrease={() => dispatch(increaseQuantity(data.id))}
           />
         </div>
         <div className="cart-sidebar-item__close">
@@ -89,7 +98,7 @@ const CartSidebarItem = ({ data }) => {
       <Modal
         title="Cofirm this action"
         visible={visible}
-        onOk={() => handleOk(data.id)}
+        onOk={() => handleOk(data[1].item_key)}
         onCancel={handleCancel}
       >
         <p>Are your sure to remove product from cart ?</p>

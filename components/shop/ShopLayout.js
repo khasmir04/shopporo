@@ -13,6 +13,7 @@ const ShopLayout = ({
   data,
   productPerPage,
   productStyle,
+  user,
   // containerType,
 }) => {
   return (
@@ -30,6 +31,7 @@ const ShopLayout = ({
               fiveColumn={fiveColumn}
               productResponsive={productResponsive}
               data={data}
+              user={user}
             />
           </Col>
         </Row>

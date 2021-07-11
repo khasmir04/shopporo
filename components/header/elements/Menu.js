@@ -14,7 +14,7 @@ import SearchBar from "./SearchBar";
 import Container from "../../other/Container";
 import { useSelector } from "react-redux";
 
-const Menu = ({ containerType, user }) => {
+const Menu = ({ containerType, userData }) => {
   const { cartItems } = useSelector((state) => state.cart);
   const { wishlistItems } = useSelector((state) => state.wishlist);
   // const cartState = useSelector((state) => state.cartReducer);
@@ -119,7 +119,7 @@ const Menu = ({ containerType, user }) => {
         width={445}
         className="menu-side"
       >
-        <CartSidebar />
+        <CartSidebar userData={userData} />
       </Drawer>
       <Drawer
         placement="right"

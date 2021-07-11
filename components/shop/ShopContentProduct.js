@@ -15,6 +15,7 @@ const ShopContentProduct = ({
   data,
   productPerPage,
   productStyle,
+  user,
 }) => {
   // const shopState = useSelector((state) => state.shopReducer);
   // const globalState = useSelector((state) => state.globalReducer);
@@ -103,6 +104,7 @@ const ShopContentProduct = ({
                         data={product}
                         productStyle={productStyle}
                         key={product.id}
+                        user={user}
                       />
                     </Col>
                   ))}

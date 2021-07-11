@@ -2033,6 +2033,7 @@ const Home = ({ user }) => {
           productResponsive={{ xs: 12, sm: 8, md: 6 }}
           productPerPage={15}
           data={data}
+          user={user}
         />
       </LayoutOne>
     </Provider>

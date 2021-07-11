@@ -23,7 +23,7 @@ const QuantitySelector = ({
       >
         -
       </Button>
-      <div className="quantity-selector-number">{data.qty}</div>
+      <div className="quantity-selector-number">{defaultValue}</div>
       <Button
         disabled={data.qty >= max}
         className="quantity-selector-controller"

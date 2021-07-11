@@ -13,9 +13,9 @@ const Header = ({ containerType, headerStyle, userData }) => {
   return (
     <div className={`header-one ${renderStyleClass(headerStyle)}`}>
       <TopNav containerType={containerType} userData={userData} />
-      <Menu containerType={containerType} />
+      <Menu containerType={containerType} userData={userData} />
     </div>
   );
-}
+};
 
 export default Header;
