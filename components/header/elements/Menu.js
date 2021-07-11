@@ -12,8 +12,10 @@ import MenuSidebar from "./MenuSidebar";
 import SearchBar from "./SearchBar";
 // import { getTotalProductInCart } from "../../../common/shopUtils";
 import Container from "../../other/Container";
+import { useSelector } from "react-redux";
 
 const Menu = ({ containerType, user }) => {
+  const { cartItems } = useSelector((state) => state.cart);
   // const cartState = useSelector((state) => state.cartReducer);
   // const wishlistState = useSelector((state) => state.wishlistReducer);
   const [cartSidebarOpen, setCartSidebarOpen] = useState(false);
@@ -66,7 +68,12 @@ const Menu = ({ containerType, user }) => {
                 onClick={() => setCartSidebarOpen(true)}
               >
                 <img src={"/assets/images/header/menu-bag.png"} alt="" />
-                <span>{/* {getTotalProductInCart(cartState)} */}</span>
+                <span>
+                  {cartItems.reduce(
+                    (totalQty, currentItem) => totalQty + currentItem.qty,
+                    0
+                  ) || 0}
+                </span>
               </div>
             </div>
           </div>

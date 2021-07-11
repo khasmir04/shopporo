@@ -1,6 +1,10 @@
 import { Empty } from "antd";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../redux/cartSlice";
 
 const ProductDetailOne = ({ data }) => {
+  const dispatch = useDispatch();
+
   return (
     data && (
       <section className="text-gray-600 body-font overflow-hidden">
@@ -95,10 +99,14 @@ const ProductDetailOne = ({ data }) => {
                   <span className="mr-3">Size</span>
                   <div className="relative">
                     <select className="rounded border appearance-none border-gray-300 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 text-base pl-3 pr-10">
-                      <option>SM</option>
-                      <option>M</option>
-                      <option>L</option>
-                      <option>XL</option>
+                      {data &&
+                        data.attributes[0].options
+                          .map((op) => op)
+                          .map((op, index) => (
+                            <option value={op} key={index}>
+                              {op}
+                            </option>
+                          ))}
                     </select>
                     <span className="absolute right-0 top-0 h-full w-10 text-center text-gray-600 pointer-events-none flex items-center justify-center">
                       <svg
@@ -120,7 +128,10 @@ const ProductDetailOne = ({ data }) => {
                 <span className="title-font font-medium text-2xl text-gray-900">
                   ${data.price}
                 </span>
-                <button className="flex ml-auto text-white bg-primary border-0 py-2 px-6 focus:outline-none rounded hover:bg-primary-dark transition duration-150 ease-in-out">
+                <button
+                  className="flex ml-auto text-white bg-primary border-0 py-2 px-6 focus:outline-none rounded hover:bg-primary-dark transition duration-150 ease-in-out"
+                  onClick={() => dispatch(addToCart(data))}
+                >
                   Add to Cart
                 </button>
                 <button className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4 hover:text-primary-dark transition duration-150 ease-in-out">

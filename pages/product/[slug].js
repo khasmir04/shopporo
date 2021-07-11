@@ -4,6 +4,8 @@ import LayoutOne from "../../components/layouts/LayoutOne";
 import { capitalizeFirstLetter } from "../../common/utils";
 import ProductDetailOne from "../../components/productDetail/ProductDetailOne";
 import { useEffect, useState } from "react";
+import { Provider } from "react-redux";
+import { store } from "../../redux/store";
 
 export default function pid() {
   const router = useRouter();
@@ -36,11 +38,13 @@ export default function pid() {
   // End Robby
 
   return (
-    <LayoutOne
-      title={foundProduct && capitalizeFirstLetter(String(foundProduct.name))}
-      clearSpaceTop
-    >
-      {foundProduct && <ProductDetailOne data={prod} />}
-    </LayoutOne>
+    <Provider store={store}>
+      <LayoutOne
+        title={foundProduct && capitalizeFirstLetter(String(foundProduct.name))}
+        clearSpaceTop
+      >
+        {foundProduct && <ProductDetailOne data={prod} />}
+      </LayoutOne>
+    </Provider>
   );
 }
