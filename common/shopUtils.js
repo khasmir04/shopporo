@@ -104,16 +104,16 @@ export const checkProductInCart = (cartArr, pid) => {
   return pid ? cartArr.find((item) => item.id === pid) : null;
 };
 
-export const checkAvaiableQuantityToAdd = (arr, product) => {
+export const checkAvailableQuantityToAdd = (arr, product) => {
   const productsInCart = arr.filter((item) => item.id === product.id);
   if (productsInCart && productsInCart.length > 0) {
     const totalProductQuantityInCart =
       productsInCart.length > 0 &&
-      productsInCart.reduce((total, item) => total + item.cartQuantity, 0);
-    let avaiable = product.quantity - totalProductQuantityInCart;
-    return avaiable < 1 ? 0 : avaiable;
+      productsInCart.reduce((total, item) => total + item.qty, 0);
+    let available = product.stock_quantity - totalProductQuantityInCart;
+    return available < 1 ? 0 : available;
   } else {
-    product.quantity;
+    product.stock_quantity;
   }
 };
 

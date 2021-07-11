@@ -1,10 +1,19 @@
 import React, { useState } from "react";
 import Slider from "react-slick";
-import { Row, Col } from "antd";
+import { Rate } from "antd";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../../redux/cartSlice";
+import { addToWishList, removeFromWishList } from "../../redux/wishlistSlice";
 
 import ProductDetailContentOne from "../productDetail/productDetailContent/ProductDetailContentOne";
 
 function ShopQuickView({ data, setModalVisible }) {
+  const dispatch = useDispatch();
+  const { wishlistItems } = useSelector((state) => state.wishlist);
+  const productInWishlist = wishlistItems.find((item) => item.id === data.id)
+    ? true
+    : false;
+
   const slider1Settings = {
     arrows: false,
   };
@@ -110,7 +119,8 @@ function ShopQuickView({ data, setModalVisible }) {
               </h1>
               <div className="flex mb-4">
                 <span className="flex items-center">
-                  <svg
+                  <Rate defaultValue={data.average_rating} disabled />
+                  {/* <svg
                     fill="currentColor"
                     stroke="currentColor"
                     strokeLinecap="round"
@@ -164,9 +174,9 @@ function ShopQuickView({ data, setModalVisible }) {
                     viewBox="0 0 24 24"
                   >
                     <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
-                  </svg>
+                  </svg> */}
                   <span className="text-gray-600 ml-3">
-                    {data.reviewCount} Reviews
+                    {data.rating_count || 0} Reviews
                   </span>
                 </span>
                 {/* <span className="flex ml-3 pl-3 py-2 border-l-2 border-gray-200 space-x-2s">
@@ -208,18 +218,23 @@ function ShopQuickView({ data, setModalVisible }) {
                 </a>
               </span> */}
               </div>
-              <p className="leading-relaxed">{data.description}</p>
+              <p className="leading-relaxed">
+                {data.description.slice(3, data.description.length - 5)}
+              </p>
               <div className="flex mt-6 items-center pb-5 border-b-2 border-gray-100 mb-5">
-                <div className="flex">
+                {/* <div className="flex">
                   <span className="mr-3">Color</span>
                   <button className="border-2 border-gray-300 rounded-full w-6 h-6 focus:outline-none"></button>
                   <button className="border-2 border-gray-300 ml-1 bg-gray-700 rounded-full w-6 h-6 focus:outline-none"></button>
                   <button className="border-2 border-gray-300 ml-1 bg-indigo-500 rounded-full w-6 h-6 focus:outline-none"></button>
-                </div>
-                <div className="flex ml-6 items-center">
+                </div> */}
+                <div className="flex items-center">
                   <span className="mr-3">Size</span>
                   <div className="relative">
-                    <select className="rounded border appearance-none border-gray-300 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 text-base pl-3 pr-10">
+                    <select
+                      className="rounded border appearance-none border-gray-300 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 text-base pl-3 pr-10"
+                      defaultValue="s"
+                    >
                       {options.map((op, index) => (
                         <option value={op} key={index}>
                           {op}
@@ -245,12 +260,31 @@ function ShopQuickView({ data, setModalVisible }) {
               </div>
               <div className="flex">
                 <span className="title-font font-medium text-2xl text-gray-900">
-                  ${data.discount ? data.price - data.discount : data.price}
+                  ${data.on_sale ? data.sale_price : data.price}
                 </span>
-                <button className="flex ml-auto text-white bg-primary border-0 py-2 px-6 focus:outline-none hover:bg-primary-dark rounded transition duration-150 ease-in-out">
-                  Add to Cart
+                <button
+                  disabled={data.stock_quantity === 0 || !data.stock_quantity}
+                  className={`flex ml-auto border-0 py-2 px-6 focus:outline-none rounded transition duration-150 ease-in-out ${
+                    data.stock_quantity === 0 || !data.stock_quantity
+                      ? "text-gray-500 bg-gray-200 cursor-not-allowed"
+                      : "text-white bg-primary hover:bg-primary-dark"
+                  }`}
+                  onClick={() => dispatch(addToCart(data))}
+                >
+                  {data.stock_quantity === 0 || !data.stock_quantity
+                    ? "Sold Out"
+                    : "Add to Cart"}
                 </button>
-                <button className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500  ml-4 hover:text-primary-dark transition duration-150 ease-in-out">
+                <button
+                  className={`rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center  ml-4 hover:text-primary-dark ${
+                    productInWishlist ? "text-primary-dark" : "text-gray-500"
+                  } transition duration-150 ease-in-out`}
+                  onClick={() =>
+                    productInWishlist
+                      ? dispatch(removeFromWishList(data.id))
+                      : dispatch(addToWishList(data))
+                  }
+                >
                   <svg
                     fill="currentColor"
                     strokeLinecap="round"

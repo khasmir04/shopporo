@@ -75,7 +75,7 @@ const CartSidebarItem = ({ data }) => {
             defaultValue={data.qty}
             data={data}
             min={1}
-            max={data.stock_quantity ? data.stock_quantity : 5}
+            max={data.stock_quantity}
             onDecrease={() => dispatch(decreaseQuantity(data.id))}
             onIncrease={() => dispatch(increaseQuantity(data.id))}
           />

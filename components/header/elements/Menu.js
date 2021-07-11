@@ -16,6 +16,7 @@ import { useSelector } from "react-redux";
 
 const Menu = ({ containerType, user }) => {
   const { cartItems } = useSelector((state) => state.cart);
+  const { wishlistItems } = useSelector((state) => state.wishlist);
   // const cartState = useSelector((state) => state.cartReducer);
   // const wishlistState = useSelector((state) => state.wishlistReducer);
   const [cartSidebarOpen, setCartSidebarOpen] = useState(false);
@@ -61,7 +62,7 @@ const Menu = ({ containerType, user }) => {
                 onClick={() => setWishlistSidebarOpen(true)}
               >
                 <img src={"/assets/images/header/menu-wishlist.png"} alt="" />
-                <span>{/* {wishlistState.length} */}</span>
+                <span>{wishlistItems.length || 0}</span>
               </div>
               <div
                 className="menu-function-item"

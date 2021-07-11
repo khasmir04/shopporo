@@ -2,12 +2,15 @@ import Link from "next/link";
 import { Rate, Button, Tooltip, Skeleton, message, Modal, Spin } from "antd";
 import classNames from "classnames";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ShopQuickView from "../shop/ShopQuickView";
 import { addToCart } from "../../redux/cartSlice";
+import { addToWishList, removeFromWishList } from "../../redux/wishlistSlice";
 
 const Product = ({ data, productStyle }) => {
   const [visible, setVisible] = useState(false);
+
+  const { wishlistItems } = useSelector((state) => state.wishlist);
   const dispatch = useDispatch();
 
   const renderStyleClass = () => {
@@ -32,6 +35,10 @@ const Product = ({ data, productStyle }) => {
   const handleImageLoaded = () => {
     setImageLoading(false);
   };
+
+  const productInWishlist = wishlistItems.find((item) => item.id === data.id)
+    ? true
+    : false;
 
   return (
     <>
@@ -80,17 +87,21 @@ const Product = ({ data, productStyle }) => {
                 </Button>
               </Tooltip>
               <Tooltip
-                // title={
-                //   productInWishlist ? "Remove from wishlist" : "Add to wishlist"
-                // }
-                title={"Add to wishlist"}
+                title={
+                  productInWishlist ? "Remove from wishlist" : "Add to wishlist"
+                }
+                // title={"Add to wishlist"}
               >
                 <Button
                   className={`product-atw ${classNames({
-                    active: true, //productInWishlist,
+                    active: productInWishlist,
                   })}`}
                   type="text"
-                  // onClick={() => onAddToWishlist(data)}
+                  onClick={() =>
+                    productInWishlist
+                      ? dispatch(removeFromWishList(data.id))
+                      : dispatch(addToWishList(data))
+                  }
                 >
                   <i className="icon_heart_alt" />
                 </Button>
@@ -98,7 +109,8 @@ const Product = ({ data, productStyle }) => {
               <Tooltip title="Add to cart">
                 <Button
                   // disabled={avaiableQuantity === 0}
-                  disabled={false}
+                  disabled={data.stock_quantity === 0 || !data.stock_quantity}
+                  // disabled={false}
                   type="text"
                   onClick={() => dispatch(addToCart(data))}
                 >
@@ -111,20 +123,21 @@ const Product = ({ data, productStyle }) => {
             <>
               <Tooltip
                 placement="left"
-                // title={
-                //   productInWishlist ? "Remove from wishlist" : "Add to wishlist"
-                // }
-
-                title={"Add to wishlist"}
+                title={
+                  productInWishlist ? "Remove from wishlist" : "Add to wishlist"
+                }
               >
                 <Button
                   className={`product-atw ${classNames({
-                    // active: productInWishlist,
-                    active: false,
+                    active: productInWishlist,
                   })}`}
                   type="text"
                   shape="circle"
-                  // onClick={() => onAddToWishlist(data)}
+                  onClick={() =>
+                    productInWishlist
+                      ? dispatch(removeFromWishList(data.id))
+                      : dispatch(addToWishList(data))
+                  }
                 >
                   <i className="icon_heart_alt" />
                 </Button>
@@ -155,7 +168,8 @@ const Product = ({ data, productStyle }) => {
               <Tooltip title="Add to cart">
                 <Button
                   // disabled={avaiableQuantity === 0}
-                  disabled={false}
+                  disabled={data.stock_quantity === 0 || !data.stock_quantity}
+                  // disabled={false}
                   className="product-atc"
                   type="text"
                   shape="circle"
@@ -176,21 +190,22 @@ const Product = ({ data, productStyle }) => {
                 </Tooltip>
                 <Tooltip
                   placement="top"
-                  // title={
-                  //   productInWishlist
-                  //     ? "Remove from wishlist"
-                  //     : "Add to wishlist"
-                  // }
-
-                  title={"Add to wishlist"}
+                  title={
+                    productInWishlist
+                      ? "Remove from wishlist"
+                      : "Add to wishlist"
+                  }
                 >
                   <Button
                     shape="circle"
                     className={`product-atw ${classNames({
-                      active: true,
-                      // active: productInWishlist,
+                      active: productInWishlist,
                     })}`}
-                    // onClick={() => onAddToWishlist(data)}
+                    onClick={() =>
+                      productInWishlist
+                        ? dispatch(removeFromWishList(data.id))
+                        : dispatch(addToWishList(data))
+                    }
                   >
                     <i className="icon_heart_alt" />
                   </Button>
@@ -198,7 +213,8 @@ const Product = ({ data, productStyle }) => {
                 <Tooltip placement="top" title="Add to cart">
                   <Button
                     // disabled={avaiableQuantity === 0}
-                    disabled={false}
+                    disabled={data.stock_quantity === 0 || !data.stock_quantity}
+                    // disabled={false}
                     shape="circle"
                     onClick={() => dispatch(addToCart(data))}
                   >
