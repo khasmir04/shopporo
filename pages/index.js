@@ -49,7 +49,6 @@ const Home = ({ user }) => {
       // console.log("Res:", res.headers.get("x-wp-total"));
       const result = await res.json();
       setData(result);
-      console.log("index.js", data);
     } catch (error) {
       console.log("Fetching products failed:", error);
     }

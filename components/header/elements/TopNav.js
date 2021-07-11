@@ -80,7 +80,9 @@ function TopNav({ containerType, userData }) {
             </div>
             {userData ? (
               <div className="top-nav-links__item md:flex items-center justify-center">
-                <a className="md:mr-7 capitalize">Hi {userData.data.user.display_name}!{" "}</a>
+                <a className="md:mr-7 capitalize">
+                  Hi {userData.data.user.display_name}!{" "}
+                </a>
                 <div>
                   <a href="/api/logout" onClick={onLogout}>
                     Logout
@@ -90,9 +92,7 @@ function TopNav({ containerType, userData }) {
             ) : (
               <div className="top-nav-links__item">
                 <Link href="/login">
-                  <a>
-                    Hi Guest,{" "}Login
-                  </a>
+                  <a>Hi Guest, Login</a>
                 </Link>
               </div>
             )}

@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import { withSession } from "../../middlewares/session";
 
 import LayoutOne from "../../components/layouts/LayoutOne";
 import { capitalizeFirstLetter } from "../../common/utils";
@@ -7,7 +8,7 @@ import { useEffect, useState } from "react";
 import { Provider } from "react-redux";
 import { store } from "../../redux/store";
 
-export default function pid() {
+export default function pid({ user }) {
   const router = useRouter();
   // const { slug } = router.query;
   // const foundProduct = getProductsBySlug(productData, router.query.slug);
@@ -40,6 +41,7 @@ export default function pid() {
   return (
     <Provider store={store}>
       <LayoutOne
+        userData={user}
         title={foundProduct && capitalizeFirstLetter(String(foundProduct.name))}
         clearSpaceTop
       >
@@ -48,3 +50,13 @@ export default function pid() {
     </Provider>
   );
 }
+
+export const getServerSideProps = withSession((context) => {
+  const { req } = context;
+
+  return {
+    props: {
+      user: req.session.get("user") || null,
+    },
+  };
+});
