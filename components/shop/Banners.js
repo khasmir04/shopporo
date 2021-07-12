@@ -13,10 +13,7 @@ const Banner = ({ containerType }) => {
               <Link href="/#">
                 <a className="banner-item">
                   <img
-                    src={
-                      process.env.PUBLIC_URL +
-                      `/assets/images/banners/${index + 1}.jpg`
-                    }
+                    src={`/assets/images/banners/${index + 1}.jpg`}
                     alt="banner"
                   />
                 </a>
