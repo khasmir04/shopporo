@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { Button, Drawer } from "antd";
 // import { useSelector, useDispatch } from "react-redux";
@@ -22,6 +22,32 @@ const Menu = ({ containerType, userData }) => {
   const [cartSidebarOpen, setCartSidebarOpen] = useState(false);
   // const [menuSidebarOpen, setMenuSidebarOpen] = useState(false);
   const [wishlistSidebarOpen, setWishlistSidebarOpen] = useState(false);
+
+  const [cartCount, setCartCount] = useState(0);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const count = await fetch(
+          `${process.env.BACKEND_URL}/wp-json/cocart/v2/cart/items/count`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${userData.token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        const response = await count.json();
+        setCartCount(response);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    fetchData();
+  }, []);
 
   return (
     <>
@@ -52,11 +78,11 @@ const Menu = ({ containerType, userData }) => {
               placeholder="What are you looking for ?"
             />
             <div className="menu-functions">
-              <Button>
+              {/* <Button>
                 <Link href="#">
                   <a>Join now</a>
                 </Link>
-              </Button>
+              </Button> */}
               <div
                 className="menu-function-item"
                 onClick={() => setWishlistSidebarOpen(true)}
@@ -69,12 +95,7 @@ const Menu = ({ containerType, userData }) => {
                 onClick={() => setCartSidebarOpen(true)}
               >
                 <img src={"/assets/images/header/menu-bag.png"} alt="" />
-                <span>
-                  {cartItems.reduce(
-                    (totalQty, currentItem) => totalQty + currentItem.qty,
-                    0
-                  ) || 0}
-                </span>
+                <span>{cartCount || 0}</span>
               </div>
             </div>
           </div>

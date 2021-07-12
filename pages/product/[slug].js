@@ -45,7 +45,7 @@ export default function pid({ user }) {
         title={foundProduct && capitalizeFirstLetter(String(foundProduct.name))}
         clearSpaceTop
       >
-        {foundProduct && <ProductDetailOne data={prod} />}
+        {foundProduct && <ProductDetailOne data={prod} user={user} />}
       </LayoutOne>
     </Provider>
   );

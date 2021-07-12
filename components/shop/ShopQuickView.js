@@ -7,7 +7,7 @@ import { addToWishList, removeFromWishList } from "../../redux/wishlistSlice";
 
 import ProductDetailContentOne from "../productDetail/productDetailContent/ProductDetailContentOne";
 
-function ShopQuickView({ data, setModalVisible }) {
+function ShopQuickView({ data, setModalVisible, user }) {
   const dispatch = useDispatch();
   const { wishlistItems } = useSelector((state) => state.wishlist);
   const productInWishlist = wishlistItems.find((item) => item.id === data.id)
@@ -53,6 +53,28 @@ function ShopQuickView({ data, setModalVisible }) {
 
   // Temporary -ROBBY
   const options = data.attributes[0].options.map((op) => op);
+
+  const onAddToCart = async (id) => {
+    try {
+      const userInfo = await fetch(
+        `${process.env.BACKEND_URL}/wp-json/cocart/v2/cart/add-item`,
+        {
+          method: "POST",
+          body: JSON.stringify({
+            id: id,
+          }),
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      const response = await userInfo.json();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   // return (
   // <div className="shop-qv">
@@ -106,7 +128,7 @@ function ShopQuickView({ data, setModalVisible }) {
           <div className="lg:w-4/5 mx-auto flex flex-wrap">
             <img
               alt="ecommerce"
-              className="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded"
+              className="lg:w-1/2 w-full lg:h-100 h-64 object-cover object-center rounded"
               src={
                 data.images.length > 0 && data !== undefined
                   ? data.images[0].src
@@ -219,7 +241,10 @@ function ShopQuickView({ data, setModalVisible }) {
               </span> */}
               </div>
               <p className="leading-relaxed">
-                {data.description.slice(3, data.description.length - 5)}
+                {data.short_description.slice(
+                  3,
+                  data.short_description.length - 5
+                )}
               </p>
               <div className="flex mt-6 items-center pb-5 border-b-2 border-gray-100 mb-5">
                 {/* <div className="flex">
@@ -269,7 +294,7 @@ function ShopQuickView({ data, setModalVisible }) {
                       ? "text-gray-500 bg-gray-200 cursor-not-allowed"
                       : "text-white bg-primary hover:bg-primary-dark"
                   }`}
-                  onClick={() => dispatch(addToCart(data))}
+                  onClick={() => onAddToCart(data.id.toString())}
                 >
                   {data.stock_quantity === 0 || !data.stock_quantity
                     ? "Sold Out"

@@ -59,10 +59,10 @@ function SearchBarMobile({ fillData, placeholder }) {
       <div className="menu-search__form">
         <Select
           className="menu-search__form-select"
-          // defaultValue={globalState.category}
+          defaultValue={"Electronic"}
           style={{ width: 150 }}
-        // onChange={onSelectCateory}
-        // value={globalState.category}
+          // onChange={onSelectCateory}
+          // value={globalState.category}
         >
           {SHOP.category.map((item, index) => (
             <Option key={index} value={item.name}>

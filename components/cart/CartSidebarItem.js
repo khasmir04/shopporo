@@ -51,7 +51,7 @@ const CartSidebarItem = ({ data, userData }) => {
   return (
     <>
       <div className="cart-sidebar-item">
-        <div className="cart-sidebar-item__image">
+        <div className="cart-sidebar-item__image w-2/12">
           <img
             src={
               data[1].featured_image && data !== undefined
@@ -61,7 +61,7 @@ const CartSidebarItem = ({ data, userData }) => {
             alt="Product image"
           />
         </div>
-        <div className="cart-sidebar-item__content">
+        <div className="cart-sidebar-item__content w-8/12">
           <Link href={`/product/[slug]`} as={`/product/${data[1].slug}`}>
             <a>{data[1].name}</a>
           </Link>
@@ -77,7 +77,7 @@ const CartSidebarItem = ({ data, userData }) => {
                   locales,
                   currency
                 )} */}
-            ${data[1].price}
+            ${data[1].totals.total.toFixed(2)}
           </h5>
           <QuantitySelector
             size="small"
@@ -89,7 +89,7 @@ const CartSidebarItem = ({ data, userData }) => {
             // onIncrease={() => dispatch(increaseQuantity(data.id))}
           />
         </div>
-        <div className="cart-sidebar-item__close">
+        <div className="cart-sidebar-item__close w-2/12">
           <a href="#" onClick={onRemoveProductFromCart}>
             <i className="icon_close" />
           </a>

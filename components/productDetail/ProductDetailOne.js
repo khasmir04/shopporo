@@ -3,12 +3,34 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../redux/cartSlice";
 import { addToWishList, removeFromWishList } from "../../redux/wishlistSlice";
 
-const ProductDetailOne = ({ data }) => {
+const ProductDetailOne = ({ data, user }) => {
   const dispatch = useDispatch();
   const { wishlistItems } = useSelector((state) => state.wishlist);
   const productInWishlist = wishlistItems.find((item) => item.id === data.id)
     ? true
     : false;
+
+  const onAddToCart = async (id) => {
+    try {
+      const userInfo = await fetch(
+        `${process.env.BACKEND_URL}/wp-json/cocart/v2/cart/add-item`,
+        {
+          method: "POST",
+          body: JSON.stringify({
+            id: id,
+          }),
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      const response = await userInfo.json();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return data ? (
     <section className="text-gray-600 body-font overflow-hidden">
@@ -131,7 +153,12 @@ const ProductDetailOne = ({ data }) => {
             </div>
             <div className="flex">
               <span className="title-font font-medium text-2xl text-gray-900">
-                ${data.on_sale ? data.sale_price : data.price}
+                ${data.on_sale ? data.sale_price : data.regular_price}
+                {data.on_sale && (
+                  <span className="text-gray-400 line-through ml-2 text-lg">
+                    ${data.regular_price}
+                  </span>
+                )}
               </span>
               <button
                 disabled={data.stock_quantity === 0 || !data.stock_quantity}
@@ -140,7 +167,7 @@ const ProductDetailOne = ({ data }) => {
                     ? "text-gray-500 bg-gray-200 cursor-not-allowed"
                     : "text-white bg-primary hover:bg-primary-dark"
                 }`}
-                onClick={() => dispatch(addToCart(data))}
+                onClick={() => onAddToCart(data.id.toString())}
               >
                 {data.stock_quantity === 0 || !data.stock_quantity
                   ? "Sold Out"

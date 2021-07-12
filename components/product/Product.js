@@ -58,7 +58,6 @@ const Product = ({ data, productStyle, user }) => {
       );
 
       const response = await userInfo.json();
-      console.log(response);
     } catch (error) {
       console.log(error);
     }
@@ -185,9 +184,9 @@ const Product = ({ data, productStyle, user }) => {
           <div className="product-content__footer">
             <div className="product-content__footer-price">
               <h5 className="product-price">
-                ${data.on_sale ? data.sale_price : data.price}
+                ${data.on_sale ? data.sale_price : data.regular_price}
               </h5>
-              {data.on_sale && <span>{data.price}</span>}
+              {data.on_sale && <span>${data.regular_price}</span>}
             </div>
             {!productStyle || productStyle === "one" ? (
               <Tooltip title="Add to cart">
@@ -260,7 +259,7 @@ const Product = ({ data, productStyle, user }) => {
         visible={visible}
         width={850}
       >
-        <ShopQuickView setModalVisible={setVisible} data={data} />
+        <ShopQuickView setModalVisible={setVisible} data={data} user={user} />
       </Modal>
     </>
   );
