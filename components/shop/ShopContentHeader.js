@@ -24,10 +24,13 @@ function ShopContentHeader({ data, productPerPage }) {
         <Select
           className="shop-content__header-filter__select"
           // defaultValue={shopState.sort}
+          defaultValue={"Default"}
           style={{ width: 250 / 16 + "em" }}
           onChange={handleChange}
         >
-          <Option value="default">Default</Option>
+          <Option value="default" selected>
+            Default
+          </Option>
           <Option value="lowHigh">Price: Low to High</Option>
           <Option value="highLow">Price: High to Low</Option>
           <Option value="az">A to Z</Option>

@@ -48,25 +48,27 @@ const CartSidebarItem = ({ data, userData }) => {
   const handleCancel = (e) => {
     setVisible(false);
   };
+
   return (
-    <>
-      <div className="cart-sidebar-item">
-        <div className="cart-sidebar-item__image w-2/12">
-          <img
-            src={
-              data[1].featured_image && data !== undefined
-                ? data[1].featured_image
-                : "/assets/images/products/clothes/1.png"
-            }
-            alt="Product image"
-          />
-        </div>
-        <div className="cart-sidebar-item__content w-8/12">
-          <Link href={`/product/[slug]`} as={`/product/${data[1].slug}`}>
-            <a>{data[1].name}</a>
-          </Link>
-          <h5>
-            {/* {data.discount
+    data && (
+      <>
+        <div className="cart-sidebar-item">
+          <div className="cart-sidebar-item__image w-2/12">
+            <img
+              src={
+                data[1].featured_image && data !== undefined
+                  ? data[1].featured_image
+                  : "/assets/images/products/clothes/1.png"
+              }
+              alt="Product image"
+            />
+          </div>
+          <div className="cart-sidebar-item__content w-8/12">
+            <Link href={`/product/[slug]`} as={`/product/${data[1].slug}`}>
+              <a>{data[1].name}</a>
+            </Link>
+            <h5>
+              {/* {data.discount
               ? formatCurrency(
                   (data.price - data.discount) * data.cartQuantity,
                   locales,
@@ -77,33 +79,34 @@ const CartSidebarItem = ({ data, userData }) => {
                   locales,
                   currency
                 )} */}
-            ${data[1].totals.total.toFixed(2)}
-          </h5>
-          <QuantitySelector
-            size="small"
-            defaultValue={data[1].quantity.value}
-            data={data[1]}
-            min={1}
-            max={data[1].quantity.max_purchase}
-            // onDecrease={() => dispatch(decreaseQuantity(data.id))}
-            // onIncrease={() => dispatch(increaseQuantity(data.id))}
-          />
+              ${data[1].totals.total.toFixed(2)}
+            </h5>
+            <QuantitySelector
+              size="small"
+              defaultValue={data[1].quantity.value}
+              data={data[1]}
+              min={1}
+              max={data[1].quantity.max_purchase}
+              // onDecrease={() => dispatch(decreaseQuantity(data.id))}
+              // onIncrease={() => dispatch(increaseQuantity(data.id))}
+            />
+          </div>
+          <div className="cart-sidebar-item__close w-2/12">
+            <a href="#" onClick={onRemoveProductFromCart}>
+              <i className="icon_close" />
+            </a>
+          </div>
         </div>
-        <div className="cart-sidebar-item__close w-2/12">
-          <a href="#" onClick={onRemoveProductFromCart}>
-            <i className="icon_close" />
-          </a>
-        </div>
-      </div>
-      <Modal
-        title="Cofirm this action"
-        visible={visible}
-        onOk={() => handleOk(data[1].item_key)}
-        onCancel={handleCancel}
-      >
-        <p>Are your sure to remove product from cart ?</p>
-      </Modal>
-    </>
+        <Modal
+          title="Cofirm this action"
+          visible={visible}
+          onOk={() => handleOk(data[1].item_key)}
+          onCancel={handleCancel}
+        >
+          <p>Are your sure to remove product from cart ?</p>
+        </Modal>
+      </>
+    )
   );
 };
 

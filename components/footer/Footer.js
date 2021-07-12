@@ -16,9 +16,7 @@ const Footer = ({ containerType }) => {
                 <Link href="#">
                   <a>
                     <img
-                      src={
-                        process.env.PUBLIC_URL + "/assets/images/logo-dark.png"
-                      }
+                      src={process.env.PUBLIC_URL + "/assets/images/logo.png"}
                       alt="Logo"
                     />
                   </a>

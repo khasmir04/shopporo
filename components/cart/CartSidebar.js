@@ -12,6 +12,7 @@ const CartSidebar = ({ userData }) => {
   // const { cartItems } = useSelector((state) => state.cart);
   const [cartItems, setCartItems] = useState([]);
   const [cartDataLoaded, setCartDataLoaded] = useState(false);
+  const [totalAmount, setTotalAmount] = useState(0);
 
   const fetchData = async () => {
     try {
@@ -26,12 +27,29 @@ const CartSidebar = ({ userData }) => {
         }
       );
 
+      const getTotal = await fetch(
+        `${process.env.BACKEND_URL}/wp-json/cocart/v2/cart/totals`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${userData.token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
       const data = await result.json();
-      // setCartItems(cartItems.push(data));
-      cartItems.push(...Object.entries(data));
-      console.log(cartItems);
-      if (data) setCartDataLoaded(true);
-    } catch (error) {}
+      const getTotalAmount = await getTotal.json();
+
+      if (data !== "No items in the cart.") {
+        cartItems.push(...Object.entries(data));
+
+        if (data) setCartDataLoaded(true);
+        setTotalAmount(getTotalAmount);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -49,10 +67,9 @@ const CartSidebar = ({ userData }) => {
 
   // return <></>;
 
-  // return cartItems.length === 0 ? (
-  //   <Empty description="No products in cart" />
-  // ) : (
-  return (
+  return !cartItems || cartItems.length === 0 ? (
+    <Empty description="No products in cart" />
+  ) : (
     <div className="cart-sidebar">
       <div className="cart-sidebar-products">
         {cartItems.map((item, index) => (
@@ -64,6 +81,12 @@ const CartSidebar = ({ userData }) => {
           Total:{" "}
           <span>
             {/* {formatCurrency(calculateTotalPrice(cartState), locales, currency)} */}
+            ${totalAmount.total}
+            {/* {cartItems.map(
+              (item) =>
+                item[1].reduce((total, curr) => total + curr.totals.totals),
+              0
+            )} */}
           </span>
         </h5>
         <div className="cart-sidebar-total__buttons">
@@ -76,8 +99,6 @@ const CartSidebar = ({ userData }) => {
       </div>
     </div>
   );
-
-  // );
 };
 
 export default CartSidebar;
